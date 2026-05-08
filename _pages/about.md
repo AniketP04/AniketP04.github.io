@@ -2,16 +2,12 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Motto. Etc.
+subtitle: B.Tech. in AI & DS @ VIT, Pune | Kaggle Master
 
 profile:
   align: right
   image: prof_pic.jpg
   image_circular: false # crops the image to make it circular
-  more_info: >
-    <p>555 your office number</p>
-    <p>123 your address street</p>
-    <p>Your City, State 12345</p>
 
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true # includes social icons at the bottom of the page
@@ -29,22 +25,24 @@ latest_posts:
 
 #### Hey Voila! :wave:
 
-I'm **Aniket Patil**, an AI & Data Science engineer passionate about making machines *see* and *understand* the world. I recently completed my **B.Tech in Artificial Intelligence and Data Science** from VIIT, Pune 🎓, and I'm actively seeking roles in **machine learning engineering** or **applied AI research**.
+I'm **Aniket Patil**, an AI & Data Science engineer passionate about making machines *see* and *understand* the world. I recently completed my B.Tech in Artificial Intelligence and Data Science from VIT, Pune 🎓, and I'm actively seeking roles in machine learning engineering or applied AI research.
 
 **🔭 Currently Exploring**
 
-Deeply focused on **Computer Vision** — and currently venturing into **3D Computer Vision** 🧊. Fascinated by how spatial understanding can unlock entirely new dimensions of perception for AI systems
+Deeply focused on Computer Vision — and currently venturing 🎯 into 3D Computer Vision 🧊. Fascinated by how spatial understanding can unlock entirely new dimensions of perception for AI systems
 
 **🏛️ Research Journey**
 
-I was a **Research Intern at IIT Ropar** (Jun 2024 – Feb 2025) under **Dr. Sukrit Gupta**, working on **semi-supervised learning for biomedical image segmentation** — tackling the annotation bottleneck in clinical AI using uncertainty estimation on cardiac MRI. This work was **accepted as a poster at ISBI 2025** 🎉.
+I was a AI Research Intern at IIT Ropar (Jun 2024 – Feb 2025) 📍 under [Dr. Sukrit Gupta](https://sites.google.com/site/sukritsite/), working on semi-supervised learning for biomedical image segmentation — tackling the annotation bottleneck in clinical AI using uncertainty estimation on cardiac MRI.
 
-Prior to that, I interned at **VIIT's research lab** (May – Aug 2023) under **Dr. Yashwant Ingle**, designing lightweight deep learning architectures for skin lesion segmentation on dermoscopic images.
+Prior to that, I interned at VIIT's research lab (May – Aug 2023) 📍 under [Dr. Yashwant Ingle](https://www.yashwantingle.com/), designing lightweight deep learning architectures for skin lesion segmentation on dermoscopic images.
 
-Independently, I've also **published two peer-reviewed papers in Springer** 📄 in the domain of skin cancer image analysis
+I've also published two peer-reviewed papers in Springer 📄 in the domain of skin cancer image analysis.
 
-**⚙️ What I Build**
+**🏅 A Small Win**
 
-I enjoy building end-to-end ML systems that are not just benchmark-accurate but actually deployable. My go-to stack is **PyTorch, OpenCV, LangChain, and Hugging Face
+I'm a [Kaggle Master](https://www.kaggle.com/aniketkolte04) — recognized for notebooks that the community found genuinely useful across EDA and algorithmic deep-dives.
 
-I'm also a **Kaggle Master** 🏅 and always up for conversations around **3D vision, medical imaging, or efficient deep learning** — feel free to reach out! 🚀
+**📬 Let's Connect**
+
+If you're working on something exciting in 3D vision, medical imaging, or efficient deep learning ⚡ — I'd love to connect! 🚀
