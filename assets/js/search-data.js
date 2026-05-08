@@ -514,11 +514,11 @@ ninja.data = [{
           window.open("mailto:%61%6E%69%6B%65%74%6B%6F%6C%74%65%30%34%30%36@%67%6D%61%69%6C.%63%6F%6D", "_blank");
         },
       },{
-        id: 'social-kaggle',
-        title: 'Kaggle',
+        id: 'social-linkedin',
+        title: 'LinkedIn',
         section: 'Socials',
         handler: () => {
-          window.open("https://www.kaggle.com/aniketkolte04", "_blank");
+          window.open("https://www.linkedin.com/in/ani-ket-patil", "_blank");
         },
       },{
         id: 'social-github',
@@ -528,18 +528,11 @@ ninja.data = [{
           window.open("https://github.com/AniketP04", "_blank");
         },
       },{
-        id: 'social-linkedin',
-        title: 'LinkedIn',
+        id: 'social-kaggle',
+        title: 'Kaggle',
         section: 'Socials',
         handler: () => {
-          window.open("https://www.linkedin.com/in/ani-ket-patil", "_blank");
-        },
-      },{
-        id: 'social-rss',
-        title: 'RSS Feed',
-        section: 'Socials',
-        handler: () => {
-          window.open("/feed.xml", "_blank");
+          window.open("https://www.kaggle.com/aniketkolte04", "_blank");
         },
       },{
         id: 'social-scholar',
@@ -549,11 +542,11 @@ ninja.data = [{
           window.open("https://scholar.google.com/citations?user=Wff-sYoAAAAJ", "_blank");
         },
       },{
-        id: 'social-custom_social',
-        title: 'Custom_social',
+        id: 'social-rss',
+        title: 'RSS Feed',
         section: 'Socials',
         handler: () => {
-          window.open("https://www.alberteinstein.com/", "_blank");
+          window.open("/feed.xml", "_blank");
         },
       },{
       id: 'light-theme',
