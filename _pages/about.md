@@ -29,28 +29,22 @@ latest_posts:
 
 #### Hey Voila! :wave:
 
-I'm **Aniket Patil**, an AI & Data Science engineer passionate about making machines *see* and *understand* the world — pixel by pixel. I recently completed my **B.Tech in Artificial Intelligence and Data Science** from Vishwakarma Institute of Information Technology, Pune 🎓, and I'm actively seeking roles in **machine learning engineering** or **applied AI research**.
+I'm **Aniket Patil**, an AI & Data Science engineer passionate about making machines *see* and *understand* the world. I recently completed my **B.Tech in Artificial Intelligence and Data Science** from VIIT, Pune 🎓, and I'm actively seeking roles in **machine learning engineering** or **applied AI research**.
 
- **🔭 Currently Exploring**
+**🔭 Currently Exploring**
 
-My primary focus is **Computer Vision** — and right now I'm diving deep into **3D Computer Vision** 🧊, fascinated by how spatial understanding can unlock entirely new dimensions of what AI perceives. Still early in this journey, but loving every bit of it.
+Deeply focused on **Computer Vision** — and currently venturing into **3D Computer Vision** 🧊. Fascinated by how spatial understanding can unlock entirely new dimensions of perception for AI systems
 
 **🏛️ Research Journey**
 
-Most recently, I was a **Research Intern at IIT Ropar** (Jun 2024 – Feb 2025), working under **Dr. Sukrit Gupta**. My work centered on **semi-supervised learning for biomedical image segmentation**, where I explored how uncertainty estimation can help models learn effectively from limited labeled data. The work focused on cardiac MRI and addressed a key bottleneck in clinical AI — the scarcity of expert annotations. This work has been **accepted as a poster at ISBI 2025** 🎉.
+I was a **Research Intern at IIT Ropar** (Jun 2024 – Feb 2025) under **Dr. Sukrit Gupta**, working on **semi-supervised learning for biomedical image segmentation** — tackling the annotation bottleneck in clinical AI using uncertainty estimation on cardiac MRI. This work was **accepted as a poster at ISBI 2025** 🎉.
 
-Before that, I interned at **VIIT's research lab** (May – Aug 2023), working under **Dr. Yashwant Ingle** on **deep learning-based skin lesion segmentation** using dermoscopic images. The focus was on designing lightweight encoder-decoder architectures that preserve fine spatial detail while remaining efficient enough for real-world clinical use.
+Prior to that, I interned at **VIIT's research lab** (May – Aug 2023) under **Dr. Yashwant Ingle**, designing lightweight deep learning architectures for skin lesion segmentation on dermoscopic images.
 
-Separately and independently, I've also **published two peer-reviewed papers in Springer** 📄 — both in the domain of skin cancer image analysis, exploring data augmentation and AI-driven diagnostic techniques.
+Independently, I've also **published two peer-reviewed papers in Springer** 📄 in the domain of skin cancer image analysis
 
 **⚙️ What I Build**
 
-Beyond research, I enjoy building end-to-end ML systems — from intelligent retrieval pipelines to real-time vision models. I care about making things that are not just accurate on benchmarks, but actually deployable and useful. My go-to stack is **PyTorch, OpenCV, LangChain, and Hugging Face**.
+I enjoy building end-to-end ML systems that are not just benchmark-accurate but actually deployable. My go-to stack is **PyTorch, OpenCV, LangChain, and Hugging Face
 
-**🏅 A Small Win**
-
-I'm a **Kaggle Master** — recognized for notebooks that the community found genuinely useful across EDA and algorithmic deep-dives.
-
-**📬 Let's Connect**
-
-If you're working on something exciting in **3D vision, medical imaging, or efficient deep learning** — I'd love to connect! 🚀
+I'm also a **Kaggle Master** 🏅 and always up for conversations around **3D vision, medical imaging, or efficient deep learning** — feel free to reach out! 🚀
