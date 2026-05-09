@@ -2,7 +2,7 @@
 layout: about
 title: About
 permalink: /
-subtitle: B.Tech. in AI & DS @ VIT, Pune | Kaggle Master
+subtitle: B.Tech. in AI & DS @ VIIT, Pune | Kaggle Master
 
 profile:
   align: right
@@ -25,7 +25,7 @@ latest_posts:
 
 #### Hey Voila! :wave:
 
-I'm **Aniket Patil**, an AI & Data Science engineer passionate about making machines *see* and *understand* the world. I recently completed my B.Tech in Artificial Intelligence and Data Science from VIT, Pune 🎓, and I'm actively seeking roles in machine learning engineering or applied AI research.
+I'm **Aniket Patil**, an AI & Data Science engineer passionate about making machines *see* and *understand* the world. I recently completed my B.Tech in Artificial Intelligence and Data Science from VIIT, Pune 🎓, and I'm actively seeking roles in deep learning engineering or applied AI research.
 
 **🔭 Currently Exploring**
 
@@ -35,7 +35,7 @@ Deeply focused on Computer Vision — and currently venturing 🎯 into 3D Compu
 
 I was a AI Research Intern at IIT Ropar (Jun 2024 – Feb 2025) 📍 under [Dr. Sukrit Gupta](https://sites.google.com/site/sukritsite/), working on semi-supervised learning for biomedical image segmentation — tackling the annotation bottleneck in clinical AI using uncertainty estimation on cardiac MRI.
 
-Prior to that, I interned at VIT's research lab (May – Aug 2023) 📍 under [Dr. Yashwant Ingle](https://www.yashwantingle.com/), designing lightweight deep learning architectures for skin lesion segmentation on dermoscopic images.
+Prior to that, I interned at VIIT's research lab (May – Aug 2023) 📍 under [Dr. Yashwant Ingle](https://www.yashwantingle.com/), designing lightweight deep learning architectures for skin lesion segmentation on dermoscopic images.
 
 I've also published two peer-reviewed papers in Springer 📄 in the domain of skin cancer image analysis.
 
