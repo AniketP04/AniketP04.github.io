@@ -35,7 +35,7 @@ Deeply focused on Computer Vision — and currently venturing 🎯 into 3D Compu
 
 I was a AI Research Intern at IIT Ropar (Jun 2024 – Feb 2025) 📍 under [Dr. Sukrit Gupta](https://sites.google.com/site/sukritsite/), working on semi-supervised learning for biomedical image segmentation — tackling the annotation bottleneck in clinical AI using uncertainty estimation on cardiac MRI.
 
-Prior to that, I interned at VIIT's research lab (May – Aug 2023) 📍 under [Dr. Yashwant Ingle](https://www.yashwantingle.com/), designing lightweight deep learning architectures for skin lesion segmentation on dermoscopic images.
+Prior to that, I interned at VIT's research lab (May – Aug 2023) 📍 under [Dr. Yashwant Ingle](https://www.yashwantingle.com/), designing lightweight deep learning architectures for skin lesion segmentation on dermoscopic images.
 
 I've also published two peer-reviewed papers in Springer 📄 in the domain of skin cancer image analysis.
 
