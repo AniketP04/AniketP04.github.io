@@ -5,4 +5,5 @@ title: CV
 nav: true
 nav_order: 5
 cv_pdf: /assets/pdf/Aniket_Patil_Resume.pdf
+description:
 ---
