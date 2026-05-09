@@ -445,10 +445,7 @@ ninja.data = [{
           description: "",
           section: "News",handler: () => {
               window.location.href = "/news/announcement_2/";
-            },},{id: "news-a-simple-inline-announcement-with-markdown-emoji-sparkles-smile",
-          title: 'A simple inline announcement with Markdown emoji! :sparkles: :smile:',
-          description: "",
-          section: "News",},{id: "news-i-received-my-bachelor-s-degree-in-artificial-intelligence-and-data-science-ai-amp-amp-ds-from-viit-pune",
+            },},{id: "news-i-received-my-bachelor-s-degree-in-artificial-intelligence-and-data-science-ai-amp-amp-ds-from-viit-pune",
           title: 'I received my bachelor’s degree in Artificial Intelligence and Data Science (AI &amp;amp;amp;...',
           description: "",
           section: "News",},{id: "projects-project-1",
