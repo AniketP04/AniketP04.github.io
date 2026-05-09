@@ -441,7 +441,7 @@ ninja.data = [{
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
             },},{id: "news-i-received-my-bachelor-s-degree-in-artificial-intelligence-and-data-science-ai-amp-amp-ds-from-viit-pune",
-          title: 'I received my bachelor’s degree in Artificial Intelligence and Data Science (AI &amp;amp;amp;...',
+          title: '🎓 I received my bachelor’s degree in Artificial Intelligence and Data Science (AI...',
           description: "",
           section: "News",},{id: "projects-project-1",
           title: 'project 1',
