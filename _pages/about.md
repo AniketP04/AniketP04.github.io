@@ -1,6 +1,6 @@
 ---
 layout: about
-title: about
+title: About
 permalink: /
 subtitle: B.Tech. in AI & DS @ VIT, Pune | Kaggle Master
 
