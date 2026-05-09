@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-🎓 I received my bachelor’s degree in Artificial Intelligence and Data Science (AI & DS) 🤖 from VIT, Pune. 
+🎓 I received my bachelor’s degree in Artificial Intelligence and Data Science (AI & DS) 🤖 from VIIT, Pune. 
