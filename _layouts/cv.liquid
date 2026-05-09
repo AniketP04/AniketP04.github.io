@@ -39,16 +39,16 @@ layout: default
 
   <article>
 
-    {% if page.cv_pdf_embed %}
-
-  <iframe
-    src="{{ page.cv_pdf | relative_url }}"
-    width="100%"
-    height="1000px"
-    style="border:none;">
-  </iframe>
-
-  {% else %}
+  {% if page.cv_pdf %}
+    <div class="mb-4">
+      <iframe
+        src="{{ page.cv_pdf | relative_url }}"
+        width="100%"
+        height="1200px"
+        style="border:none;">
+      </iframe>
+    </div>
+  {% endif %}
 
     <div class="cv">
       {% comment %} Determine which CV format to render {% endcomment %}
@@ -402,5 +402,3 @@ layout: default
     </div>
   </article>
 </div>
-
-{% endif %}
