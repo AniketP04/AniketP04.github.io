@@ -6,7 +6,7 @@ subtitle: B.Tech. in AI & DS @ VIT, Pune | Kaggle Master
 
 profile:
   align: right
-  image: prof_pic.jpg
+  image: aniket_portfolio.png
   image_circular: false # crops the image to make it circular
 
 selected_papers: false # includes a list of papers marked as "selected={true}"
