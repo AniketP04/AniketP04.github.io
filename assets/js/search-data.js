@@ -440,11 +440,6 @@ ninja.data = [{
           description: "",
           section: "Books",handler: () => {
               window.location.href = "/books/the_godfather/";
-            },},{id: "news-a-long-announcement-with-details",
-          title: 'A long announcement with details',
-          description: "",
-          section: "News",handler: () => {
-              window.location.href = "/news/announcement_2/";
             },},{id: "news-i-received-my-bachelor-s-degree-in-artificial-intelligence-and-data-science-ai-amp-amp-ds-from-viit-pune",
           title: 'I received my bachelor’s degree in Artificial Intelligence and Data Science (AI &amp;amp;amp;...',
           description: "",
