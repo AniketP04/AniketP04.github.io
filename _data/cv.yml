@@ -4,10 +4,6 @@ cv:
   email: aniketkolte0406@gmail.com
   # location: Princeton, NJ
   # image: ""
-  summary: ML Engineer & Applied AI Researcher with 1+ years of hands-on experience building end-to-end deep learning systems —
-          from PyTorch training pipelines to production RAG deployments. Published twice in Springer, recognized as a Kaggle
-          Master, and interned at IIT Ropar delivering clinical-grade segmentation models that outperformed fully-supervised
-          baselines with 20% labeled data. Passionate about closing the gap between research and real-world deployment.
 
   social_networks:
     - network: GitHub

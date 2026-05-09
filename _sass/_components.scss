@@ -78,9 +78,15 @@ ul.task-list input[type="checkbox"] {
   margin-right: 1rem;
 }
 
+.profile img {
+  width: 350px;
+  height: 400px;
+  object-fit: cover;
+}
+
 @media (min-width: 576px) {
   .profile {
-    width: 30%;
+    width: 40%;
 
     .address {
       p {
