@@ -50,6 +50,11 @@ ninja.data = [{
           description: "This research project provides a meticulous assessment of the forecasting prowess of three renowned time series models using ARIMA, LSTM, and Prophet applied to stock prices of major companies (Apple, Microsoft, NVIDIA) from prominent indices such as NYSE, NASDAQ, and S&amp;P 500.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Portfolio-Optimization-Using-Market-Correlations/";
+            },},{id: "projects-production-rag-system-with-hybrid-search-amp-evaluation-framework",
+          title: 'Production RAG System with Hybrid Search &amp;amp; Evaluation Framework',
+          description: "A production-ready RAG system that combines semantic vector search (FAISS) with keyword matching (BM25) to deliver high-quality, citation-backed answers. Built with comprehensive evaluation metrics, monitoring, and one-command Docker deployment.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/RAG%20Pipeline%20with%20Evaluation/";
             },},{id: "teachings-data-science-fundamentals",
           title: 'Data Science Fundamentals',
           description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
