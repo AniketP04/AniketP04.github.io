@@ -1,19 +1,30 @@
 ---
 layout: page
 title: Realtime Monocular Depth Mapping
-description: A deep learning project for mapping depth maps from a single RGB image using a lightweight U-Net based architecture optimized for real-time inference.
+description: Real-time monocular depth mapping using lightweight U-Net architecture.
 img: assets/img/depth_proj.gif
 importance: 1
 related_publications: false
+github: https://github.com/AniketP04/Realtime-Monocular-Depth-Mapping
 ---
 
-# Realtime Monocular Depth Mapping
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/depth.gif" title="sample" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
 
 A PyTorch-based depth mapping project using the NYU dataset. This implementation includes various neural network architectures for single image depth prediction with custom loss functions and data augmentation.
 
 ## Summary
 
 This project focuses on monocular depth mapping from single RGB images using deep neural networks. Depth mapping is a critical task in computer vision with applications in robotics, autonomous driving, 3D reconstruction, and scene understanding. This work implements and compares multiple network architectures (Autoencoder and UNet) trained on the [NYU Depth dataset](https://www.kaggle.com/datasets/awsaf49/nyuv2-official-split-dataset). Our approach combines multiple loss functions including SSIM loss and gradient-based depth loss to improve depth prediction quality. The implemented methods achieve competitive accuracy with efficient computational performance suitable for real-time applications.
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/nyu_depth_v2_labeled.jpg" title="nyu dataset" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
 
 ## Features
 
@@ -34,44 +45,6 @@ This project focuses on monocular depth mapping from single RGB images using dee
 - OpenCV
 - Matplotlib
 - ImageIO
-
-## Methodology
-
-### Network Architectures
-
-The project implements and compares two primary network architectures for depth mapping:
-
-#### 1. Autoencoder Network
-
-The Autoencoder follows a symmetric encoder-decoder structure designed for efficient depth prediction:
-
-**Architecture Overview:**
-- **Input**: 3-channel RGB images
-- **Encoder**: Progressive downsampling with convolution blocks reducing spatial dimensions while increasing channel depth
-- **Bottleneck**: Dense feature representation at the lowest resolution (dimensions: 101×101×1)
-- **Decoder**: Progressive upsampling with bilinear interpolation and convolution blocks
-- **Output**: Single-channel depth map matching input resolution
-
-**Key components:**
-- ConvBlocks: Multiple 3×3 convolutions with LeakyReLU activations
-- UpBlocks: Bilinear upsampling followed by concatenation with encoder features
-- Progressive dimensionality changes: 3 → 13 → 32 → 57 → 76 → 101 (bottleneck) → 76 → 57 → 32 → 13 → 1
-
-#### 2. UNet Network
-
-The UNet architecture incorporates skip connections for preserving spatial information:
-
-**Key advantages over Autoencoder:**
-- **Skip Connections**: Direct connections between encoder and decoder layers at corresponding resolutions
-- **Feature Preservation**: Maintains both low-level details and high-level semantic information
-- **Gradient Flow**: Improved gradient propagation during backpropagation
-- **Better Detail Recovery**: Enhanced ability to recover fine depth details in the output
-
-**Configuration:**
-- Input channels: 3 (RGB)
-- Output channels: 1 (Depth)
-- Skip connections at multiple resolution levels
-- Symmetric encoder-decoder with feature concatenation
 
 ### Key Findings
 
@@ -100,6 +73,3 @@ The training process uses multiple loss functions:
 - **Checkpoint Saving**: Automatic model and optimizer state saving
 - **Data Augmentation**: Random horizontal flips and other augmentations
 - **Multi-GPU Support**: Configurable CUDA device selection
-
-## Repository
-[GitHub Repository](https://github.com/AniketP04/Realtime-Monocular-Depth-Mapping)
