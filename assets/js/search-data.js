@@ -45,7 +45,12 @@ ninja.data = [{
             },},{id: "news-i-received-my-bachelor-s-degree-in-artificial-intelligence-and-data-science-ai-amp-amp-ds-from-viit-pune",
           title: '🎓 I received my bachelor’s degree in Artificial Intelligence and Data Science (AI...',
           description: "",
-          section: "News",},{id: "teachings-data-science-fundamentals",
+          section: "News",},{id: "projects-portfolio-optimization-using-market-correlations",
+          title: 'Portfolio Optimization Using Market Correlations',
+          description: "This research project provides a meticulous assessment of the forecasting prowess of three renowned time series models using ARIMA, LSTM, and Prophet applied to stock prices of major companies (Apple, Microsoft, NVIDIA) from prominent indices such as NYSE, NASDAQ, and S&amp;P 500.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/Portfolio-Optimization-Using-Market-Correlations/";
+            },},{id: "teachings-data-science-fundamentals",
           title: 'Data Science Fundamentals',
           description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
           section: "Teachings",handler: () => {
