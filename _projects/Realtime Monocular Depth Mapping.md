@@ -7,6 +7,8 @@ importance: 1
 related_publications: false
 ---
 
+# Realtime Monocular Depth Mapping
+
 A PyTorch-based depth mapping project using the NYU dataset. This implementation includes various neural network architectures for single image depth prediction with custom loss functions and data augmentation.
 
 ## Summary
