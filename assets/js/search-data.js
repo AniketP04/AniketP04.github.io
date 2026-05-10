@@ -57,7 +57,7 @@ ninja.data = [{
               window.location.href = "/projects/RAG%20Pipeline%20with%20Evaluation/";
             },},{id: "projects-realtime-monocular-depth-mapping",
           title: 'Realtime Monocular Depth Mapping',
-          description: "A deep learning project for mapping depth maps from a single RGB image using a lightweight U-Net based architecture optimized for real-time inference.",
+          description: "Real-time monocular depth mapping using lightweight U-Net architecture.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Realtime%20Monocular%20Depth%20Mapping/";
             },},{id: "teachings-data-science-fundamentals",
