@@ -47,7 +47,7 @@ ninja.data = [{
           description: "",
           section: "News",},{id: "projects-portfolio-optimization-using-market-correlations",
           title: 'Portfolio Optimization Using Market Correlations',
-          description: "This research project provides a meticulous assessment of the forecasting prowess of three renowned time series models using ARIMA, LSTM, and Prophet applied to stock prices of major companies (Apple, Microsoft, NVIDIA) from prominent indices such as NYSE, NASDAQ, and S&amp;P 500.",
+          description: "Forecasting stock prices using ARIMA, LSTM, and Prophet time-series models.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Portfolio-Optimization-Using-Market-Correlations/";
             },},{id: "projects-production-rag-system-with-hybrid-search-amp-evaluation-framework",
