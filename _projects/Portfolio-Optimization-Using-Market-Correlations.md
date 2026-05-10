@@ -8,6 +8,12 @@ importance: 1
 
 # Optimizing Investment Portfolios using Time Series Forecasting
 
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/stock_market.png" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
+
 A comparative analysis of **ARIMA, LSTM, and Prophet** models for stock price prediction across major market indices including NASDAQ, NYSE, and S&P 500.
 
 ## Overview
@@ -15,6 +21,18 @@ This project evaluates the forecasting performance of three popular time series 
 - ARIMA
 - LSTM
 - Prophet
+
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/Nvidia_logo.svg" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/microsoft.jpg" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/apple.png" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
 
 The study also includes sector-wise stock analysis and visualization of prediction trends for technology companies such as Apple, Microsoft, and Nvidia.
 
