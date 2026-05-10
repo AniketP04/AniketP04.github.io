@@ -52,7 +52,7 @@ ninja.data = [{
               window.location.href = "/projects/Portfolio-Optimization-Using-Market-Correlations/";
             },},{id: "projects-production-rag-system-with-hybrid-search-amp-evaluation-framework",
           title: 'Production RAG System with Hybrid Search &amp;amp; Evaluation Framework',
-          description: "A production-ready RAG system that combines semantic vector search (FAISS) with keyword matching (BM25) to deliver high-quality, citation-backed answers. Built with comprehensive evaluation metrics, monitoring, and one-command Docker deployment.",
+          description: "Production-ready RAG system using FAISS, BM25, Docker, and evaluation metrics.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/RAG%20Pipeline%20with%20Evaluation/";
             },},{id: "projects-realtime-monocular-depth-mapping",
