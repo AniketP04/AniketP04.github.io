@@ -14,7 +14,11 @@ A production-ready RAG system that combines semantic vector search (FAISS) with 
 
 Enterprise-grade Retrieval-Augmented Generation (RAG) system combining semantic vector search and keyword retrieval for accurate, citation-backed responses.
 
-<img width="2451" height="2275" alt="image" src="https://github.com/user-attachments/assets/d4738aaf-e154-4e0c-a503-466b9d5a4bf0" />
+<div class="row">
+    <div class="col-sm mt-3 mt-md-0">
+        {% include figure.liquid loading="eager" path="assets/img/rag_flow.png" title="example image" class="img-fluid rounded z-depth-1" %}
+    </div>
+</div>
 
 ## Overview
 This project implements a production-ready RAG pipeline using:
