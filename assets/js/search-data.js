@@ -55,6 +55,11 @@ ninja.data = [{
           description: "A production-ready RAG system that combines semantic vector search (FAISS) with keyword matching (BM25) to deliver high-quality, citation-backed answers. Built with comprehensive evaluation metrics, monitoring, and one-command Docker deployment.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/RAG%20Pipeline%20with%20Evaluation/";
+            },},{id: "projects-realtime-monocular-depth-mapping",
+          title: 'Realtime Monocular Depth Mapping',
+          description: "A deep learning project for mapping depth maps from a single RGB image using a lightweight U-Net based architecture optimized for real-time inference.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/Realtime%20Monocular%20Depth%20Mapping/";
             },},{id: "teachings-data-science-fundamentals",
           title: 'Data Science Fundamentals',
           description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
