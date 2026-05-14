@@ -16,7 +16,7 @@ Enterprise-grade Retrieval-Augmented Generation (RAG) system combining semantic 
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/rag_flow.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/rag_eval.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
