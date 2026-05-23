@@ -4,7 +4,6 @@ title: VAE-Inspired Diffusion Revolution
 date: 2026-05-23
 description: This blog explains how diffusion models overcome VAE blurriness by generating images through gradual denoising, while also showing the conceptual connection to VAE-style latent modeling. It compares the stability and generative strengths of diffusion models with traditional approaches and highlights why their stepwise reverse process is so powerful.
 thumbnail: assets/img/thumbnail_diffusion.png
-giscus_comments: true
 citation: true
 toc:
   sidebar: left
@@ -1028,6 +1027,10 @@ Modern diffusion systems are largely engineered around carefully
 balancing these competing objectives to achieve scalable, high-quality
 generation.
 
+# Conclusion
+
+Diffusion models offer a powerful alternative to GANs and VAEs by trading a single-step generator for a sequence of small, stable denoising steps. This gradual reverse process avoids adversarial collapse and the blurriness caused by one-shot latent reconstruction. By framing generation as iterative refinement, diffusion models can capture rich multimodal structure and produce sharp, realistic samples. The U-Net noise predictor is a key ingredient, enabling the model to adapt to different noise levels and restore both global layout and fine detail. Noise schedules like cosine help allocate learning where it matters most, while guidance and latent compression balance fidelity, control, and efficiency. In practice, diffusion models have become the dominant approach for high-quality image synthesis because they combine theoretical grounding with strong empirical performance. Future improvements will continue to narrow the speed gap while preserving their stability and expressiveness.
+
 # References
 
 1. Dhariwal, P., & Nichol, A. (2021). *Diffusion Models Beat GANs on Image Synthesis*. arXiv:2105.05233.
@@ -1045,8 +1048,3 @@ generation.
 7. Ronneberger, O., Fischer, P., & Brox, T. (2015). *U-Net: Convolutional Networks for Biomedical Image Segmentation*. arXiv:1505.04597.
 
 8. Erdem, K. (2023). *Step by Step Visual Introduction to Diffusion Models*. Retrieved from https://erdem.pl/2023/11/step-by-step-visual-introduction-to-diffusion-models
-
----
-
-# Citation
-
