@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "books-the-godfather",
+        },{id: "post-vae-inspired-diffusion-revolution",
+        
+          title: "VAE-Inspired Diffusion Revolution",
+        
+        description: "This blog explains how diffusion models overcome VAE blurriness by generating images through gradual denoising, while also showing the conceptual connection to VAE-style latent modeling. It compares the stability and generative strengths of diffusion models with traditional approaches and highlights why their stepwise reverse process is so powerful.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/VAE-Inspired-Diffusion-Revolution/";
+          
+        },
+      },{id: "books-the-godfather",
           title: 'The Godfather',
           description: "",
           section: "Books",handler: () => {
