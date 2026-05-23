@@ -5,6 +5,12 @@ window.MathJax = {
       ["$", "$"],
       ["\\(", "\\)"],
     ],
+    displayMath: [
+      ["$$", "$$"],
+      ["\\[", "\\]"],
+    ],
+    processEscapes: true,
+    processEnvironments: true,
   },
   options: {
     renderActions: {
@@ -21,6 +27,17 @@ window.MathJax = {
         },
         "",
       ],
+    },
+  },
+  startup: {
+    ready() {
+      MathJax.startup.defaultReady();
+
+      window.addEventListener("load", () => {
+        MathJax.typesetPromise()
+          .then(() => console.log("MathJax typeset complete"))
+          .catch((err) => console.error("MathJax error:", err));
+      });
     },
   },
 };
