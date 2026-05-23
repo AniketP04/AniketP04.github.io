@@ -5,59 +5,9 @@ date: 2026-05-23
 description: This blog explains how diffusion models overcome VAE blurriness by generating images through gradual denoising, while also showing the conceptual connection to VAE-style latent modeling. It compares the stability and generative strengths of diffusion models with traditional approaches and highlights why their stepwise reverse process is so powerful.
 thumbnail: assets/img/thumbnail_diffusion.png
 citation: true
-toc:
-  sidebar: left
-
-# toc:
-#   - name: Why Diffusion Models?
-#     # if a section has subsections, you can add them as follows:
-#     subsections:
-#       - name: Why not just stick with GANs?
-#       - name: Why not just stick with VAEs?
-#       - name: The gap that diffusion models fill
-#   - name: Diffusion Models - Introduction
-#     subsections:
-#       - name: Forward Diffusion process
-#         subsubsections:
-#           - name: The Noise Schedule
-#       - name: Connection with Stochastic Gradient Langevin Dynamics (SGLD)
-#       - name: The Reverse Process\(:\) Learning to Denoise
-#         subsubsections:
-#           - name: Reverse Conditional Distribution
-#           - name: Learning the Reverse Process
-#           - name: Variational Learning Objective
-#   - name: Reverse Diffusion via VAEs
-#     subsections:
-#       - name: Forward Process as the Encoder
-#       - name: Reverse Process as the Decoder
-#         subsubsections:
-#           - name: Why the Reverse Process Works
-#           - name: Relationship to the ELBO in VAEs
-#   - name: The U-Net Architecture for Noise Prediction
-#     subsections:
-#       - name: Diffusion-Specific Adaptations
-#         subsubsections:
-#           - name: Timestep Embeddings
-#           - name: Residual Blocks
-#           - name: Self-Attention Layers
-#           - name: Group Normalization
-#       - name: Multi-Scale Denoising Behavior
-#   - name: Diffusion Model Algorithm
-#     subsections:
-#       - name: Training
-#       - name: Sampling/Image Generation
-#   - name: Key Parameters in Diffusion Models
-#     subsections:
-#       - name: Number of Timesteps \((T)\)
-#       - name: Noise Schedule \((\beta_t)\)
-#       - name: Guidance Scale \((w)\)
-#       - name: Latent Compression Factor
-#       - name: U-Net Attention Resolution
-#       - name: VAE Regularization Strength
-#       - name: Tradeoffs Between Parameters
-#   - name: Reference
-#   - name: Citation
+toc: true
 ---
+
 
 # Why Diffusion Models?
 
@@ -109,9 +59,9 @@ blurring them together.
 <figure style="text-align:center;">
   <img src="/assets/img/diffusion_blog/gan_vae_diffusion.png"
        style="width:100%; max-width:930px; height:auto;">
-  <figcaption>
+    <div class="caption">
     Comparison between GANs, VAEs, and Diffusion Models.
-  </figcaption>
+</div>
 </figure>
 
 The one trade-off is speed: generating an image requires hundreds of
@@ -132,9 +82,9 @@ same high dimensionality as the original data.
 <figure style="text-align:center;">
   <img src="/assets/img/diffusion_blog/diffusion_model.png"
        style="width:100%; max-width:930px; height:auto;">
-  <figcaption>
+     <div class="caption">
     Overview of the diffusion model framework.
-  </figcaption>
+</div>
 </figure>
 
 Diffusion Models are a class of generative models designed to produce
@@ -182,9 +132,9 @@ equivalent to an isotropic Gaussian distribution.
 <figure style="text-align:center;">
   <img src="/assets/img/diffusion_blog/forward_pro.png"
        style="width:100%; max-width:930px; height:auto;">
-  <figcaption>
+       <div class="caption">
     Forward diffusion process progressively adding noise to the data.
-  </figcaption>
+</div>
 </figure>
 
 A key mathematical property makes diffusion models computationally
@@ -254,9 +204,9 @@ steps contribute little useful learning signal.
 <figure style="text-align:center;">
   <img src="/assets/img/diffusion_blog/linear.jpg"
        style="width:100%; max-width:930px; height:auto;">
-  <figcaption>
+       <div class="caption">
     Linear noise schedule in the diffusion process.
-  </figcaption>
+</div>
 </figure>
 
 To overcome this issue, Nichol and Dhariwal introduced the **cosine
@@ -288,9 +238,9 @@ model can learn richer and more meaningful image structure.
 <figure style="text-align:center;">
   <img src="/assets/img/diffusion_blog/cosine.jpg"
        style="width:100%; max-width:930px; height:auto;">
-  <figcaption>
+       <div class="caption">
     Cosine noise schedule used in diffusion models.
-  </figcaption>
+</div>
 </figure>
 
 In practice, cosine schedules consistently produce higher-quality
@@ -324,9 +274,9 @@ combining two components:
 <figure style="text-align:center;">
   <img src="/assets/img/diffusion_blog/coonection_sgld_diffusion.png"
        style="width:100%; max-width:930px; height:auto;">
-  <figcaption>
+       <div class="caption">
     Connection between SGLD and diffusion-based sampling.
-  </figcaption>
+</div>
 </figure>
 
 The update rule for SGLD is:
@@ -402,9 +352,9 @@ reconstruct a clean sample \\(x_0\\).
 <figure style="text-align:center;">
   <img src="/assets/img/diffusion_blog/reverse_diffusion.png"
        style="width:100%; max-width:930px; height:auto;">
-  <figcaption>
+       <div class="caption">
     Reverse diffusion process from noise to generated sample.
-  </figcaption>
+</div>
 </figure>
 
 If we could exactly model the reverse transition probabilities
@@ -641,9 +591,9 @@ which reconstructs a slightly cleaner image from a noisier one.
 <figure style="text-align:center;">
   <img src="/assets/img/diffusion_blog/reverse_diff.png"
        style="width:100%; max-width:930px; height:auto;">
-  <figcaption>
+       <div class="caption">
     Reverse diffusion process across timesteps.
-  </figcaption>
+</div>
 </figure>
 
 Instead of generating the image in a single step, the diffusion model
@@ -683,8 +633,11 @@ The neural network learns to approximate this optimal denoising
 direction without directly observing the true reverse distribution
 during generation.
 
-> **Intuition:** Effectively, the model learns: Given a noisy image at timestep $$t$$,
+> ##### Intuition
+>
+> Effectively, the model learns: Given a noisy image at timestep $$t$$,
 > what noise component was likely added?
+{: .block-intuition }
 
 Once the predicted noise is removed, the sample moves slightly closer to
 the clean data manifold.
@@ -750,9 +703,9 @@ and textures, while deeper layers encode higher-level global structure.
 <figure style="text-align:center;">
   <img src="/assets/img/diffusion_blog/architecutre.png"
        style="width:100%; max-width:930px; height:auto;">
-  <figcaption>
+       <div class="caption">
     Architecture of the diffusion model.
-  </figcaption>
+</div>
 </figure>
 
 The decoder then progressively upsamples these compressed
@@ -841,17 +794,20 @@ progressively refined over successive denoising steps.
 <figure style="text-align:center;">
   <img src="/assets/img/diffusion_blog/algorithm.png"
        style="width:100%; max-width:930px; height:auto;">
-  <figcaption>
-    Diffusion model training and sampling algorithm.
-  </figcaption>
+            <div class="caption">
+Diffusion model training and sampling algorithm.
+</div>
 </figure>
 
 ## Training
 
 This algorithm teaches the model how to remove noise from images.
 
-> **Intuition:** The model learns by repeatedly seeing corrupted images
+> ##### Intuition
+>
+> The model learns by repeatedly seeing corrupted images
 > and figuring out how to clean them.
+{: .block-intuition }
 
 1.  Pick a real image.
 
@@ -872,8 +828,11 @@ This algorithm teaches the model how to remove noise from images.
 
 This algorithm generates new images using the trained model.
 
-> **Intuition:** The model starts from static noise and progressively
+> ##### Intuition
+>
+> The model starts from static noise and progressively
 > "cleans" it into a meaningful image.
+{: .block-intuition }
 
 1.  Start with pure random noise.
 
@@ -1048,3 +1007,26 @@ Diffusion models offer a powerful alternative to GANs and VAEs by trading a sing
 7. Ronneberger, O., Fischer, P., & Brox, T. (2015). *U-Net: Convolutional Networks for Biomedical Image Segmentation*. arXiv:1505.04597.
 
 8. Erdem, K. (2023). *Step by Step Visual Introduction to Diffusion Models*. Retrieved from https://erdem.pl/2023/11/step-by-step-visual-introduction-to-diffusion-models
+
+
+# Citation
+
+If you found this useful, please cite this as:
+
+{% capture citation_quote -%}
+> {{ site.last_name }}, {{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} ({{ page.date | date: "%b %Y" }}). {{ page.title }}. {% if site.title != 'blank' %}{{ site.title }}. {% endif %}{{ site.url }}.
+{%- endcapture %}
+{{ citation_quote | markdownify }}
+
+OR
+
+```bibtex
+@article{ {{ site.last_name | downcase }}{{ page.date | date: "%Y" }}{{ page.title | slugify }},
+  title   = { {{ page.title }} },
+  author  = { {{ site.last_name }}, {{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} },{% if site.title != 'blank' %}journal = { {{ site.title }} },{% endif %}
+  blog = { {{site.url}} },
+  year    = { {{ page.date | date: "%Y" }} },
+  month   = { {{ page.date | date: "%b" }} },
+  url     = { {{ site.url }}{{ page.url }} }
+}
+```

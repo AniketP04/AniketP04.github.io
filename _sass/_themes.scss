@@ -23,9 +23,9 @@
   --global-back-to-top-bg-color: rgba(
     #{color.channel(v.$black-color, "red", v.$space: rgb)},
     #{color.channel(v.$black-color, "green", v.$space: rgb)},
-    #{color.channel(v.$black-color, "blue", v.$space: rgb)},
-    0.4
-  );
+    #{color.channel(v.$black-color, "blue", v.$space: rgb)}, 0.4
+    );
+
   --global-back-to-top-text-color: #{v.$white-color};
   --global-newsletter-bg-color: #{v.$white-color};
   --global-newsletter-text-color: #{v.$black-color};
@@ -34,14 +34,21 @@
   --global-tip-block-bg: #e2f5ec;
   --global-tip-block-text: #215d42;
   --global-tip-block-title: #359469;
+
   --global-warning-block: #e7c000;
   --global-warning-block-bg: #fff8d8;
   --global-warning-block-text: #6b5900;
   --global-warning-block-title: #b29400;
+
   --global-danger-block: #c00;
   --global-danger-block-bg: #ffe0e0;
   --global-danger-block-text: #600;
   --global-danger-block-title: #c00;
+
+  --global-intuition-block: #3b82f6;
+  --global-intuition-block-bg: #eff6ff;
+  --global-intuition-block-text: #1e3a8a;
+  --global-intuition-block-title: #1d4ed8;
 
   #light-toggle-system {
     display: inline-block;

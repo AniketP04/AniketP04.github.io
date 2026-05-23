@@ -112,6 +112,27 @@ blockquote {
     }
   }
 
+  &.block-intuition {
+    border-color: var(--global-intuition-block);
+    background-color: var(--global-intuition-block-bg);
+
+    em,
+    li,
+    p,
+    strong {
+      color: var(--global-intuition-block-text);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      color: var(--global-intuition-block-title);
+    }
+  }
+
   &.block-danger {
     border-color: var(--global-danger-block);
     background-color: var(--global-danger-block-bg);
