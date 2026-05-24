@@ -68,99 +68,31 @@
 
       <d-article>
   {% if page.toc and page.toc.size > 0 %}
-
-    <!-- TOC STYLE -->
-    <style>
-      d-contents nav {
-        font-size: 0.9rem;
-      }
-
-      .toc-section {
-        margin-bottom: 0.5rem;
-      }
-
-      .toc-header {
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        user-select: none;
-        gap: 0.4rem;
-      }
-
-      .toc-toggle {
-        width: 14px;
-        display: inline-block;
-        transition: transform 0.2s ease;
-        font-size: 0.75rem;
-      }
-
-      .toc-toggle.open {
-        transform: rotate(90deg);
-      }
-
-      .toc-link {
-        text-decoration: none;
-        color: inherit;
-      }
-
-      .toc-subsections {
-        margin-top: 0.3rem;
-        margin-left: 1rem;
-        padding-left: 0.8rem;
-        border-left: 1px solid #ccc;
-
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.25s ease;
-      }
-
-      .toc-subsections.open {
-        max-height: 500px;
-      }
-
-      .toc-subsections li {
-        margin: 0.3rem 0;
-      }
-
-      .toc-subsections a {
-        text-decoration: none;
-        color: inherit;
-        font-size: 0.82rem;
-      }
-
-      .toc-subsections a:hover,
-      .toc-link:hover {
-        color: #007acc;
-      }
-    </style>
-
     <d-contents>
-      <nav class="l-text figcaption">
+      <nav class="l-text figcaption toc-dropdown">
+
         <h3>Contents</h3>
 
         {% for section in page.toc %}
           <div class="toc-section">
 
-            <!-- SECTION HEADER -->
-            <div class="toc-header">
+            <!-- Main Section -->
+            <button class="toc-toggle">
 
-              {% if section.subsections %}
-                <span class="toc-toggle">▶</span>
-              {% else %}
-                <span class="toc-toggle"></span>
-              {% endif %}
-
-              <a
-                class="toc-link"
-                href="#{{ section.name | slugify }}"
-              >
+              <a href="#{{ section.name | slugify }}" class="toc-main-link">
                 {{ section.name }}
               </a>
-            </div>
 
-            <!-- SUBSECTIONS -->
+              {% if section.subsections %}
+                <span class="toc-arrow">▸</span>
+              {% endif %}
+
+            </button>
+
+            <!-- Subsections -->
             {% if section.subsections %}
               <ul class="toc-subsections">
+
                 {% for subsection in section.subsections %}
                   <li>
                     <a href="#{{ subsection.name | slugify }}">
@@ -168,55 +100,153 @@
                     </a>
                   </li>
                 {% endfor %}
+
               </ul>
             {% endif %}
 
           </div>
         {% endfor %}
+
       </nav>
     </d-contents>
 
-    <!-- TOC SCRIPT -->
-    <script>
-      document.addEventListener("DOMContentLoaded", function () {
-
-        const headers = document.querySelectorAll(".toc-header");
-
-        headers.forEach(header => {
-
-          const toggle = header.querySelector(".toc-toggle");
-          const subsectionList =
-            header.parentElement.querySelector(".toc-subsections");
-
-          if (!subsectionList) return;
-
-          header.addEventListener("click", function (e) {
-
-            // prevent toggling when clicking actual link
-            if (e.target.tagName.toLowerCase() === "a") {
-              return;
-            }
-
-            subsectionList.classList.toggle("open");
-            toggle.classList.toggle("open");
-          });
-        });
-      });
-    </script>
-
   {% elsif page.toc == true %}
-
     <d-contents>
       <nav class="l-text figcaption">
         <h3>Contents</h3>
         {% toc %}
       </nav>
     </d-contents>
-
   {% endif %}
 
   {{ content }}
 </d-article>
+
+
+<!-- ========================= -->
+<!-- CSS -->
+<!-- ========================= -->
+
+<style>
+/* TOC Container */
+.toc-dropdown {
+  font-size: 0.95rem;
+}
+
+/* Each Section */
+.toc-section {
+  margin-bottom: 8px;
+}
+
+/* Toggle Button */
+.toc-toggle {
+  width: 100%;
+  background: transparent;
+  border: none;
+  padding: 6px 0;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  cursor: pointer;
+  text-align: left;
+}
+
+/* Main Section Link */
+.toc-main-link {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+  flex: 1;
+}
+
+/* Arrow */
+.toc-arrow {
+  font-size: 0.75rem;
+  transition: transform 0.25s ease;
+}
+
+/* Rotate arrow when active */
+.toc-section.active .toc-arrow {
+  transform: rotate(90deg);
+}
+
+/* Subsection List */
+.toc-subsections {
+  list-style: none;
+
+  margin: 0;
+  padding-left: 16px;
+
+  max-height: 0;
+  overflow: hidden;
+
+  transition:
+    max-height 0.3s ease,
+    margin-top 0.3s ease;
+}
+
+/* Open state */
+.toc-section.active .toc-subsections {
+  max-height: 500px;
+  margin-top: 6px;
+}
+
+/* Subsection items */
+.toc-subsections li {
+  margin: 5px 0;
+}
+
+/* Subsection links */
+.toc-subsections a {
+  text-decoration: none;
+  color: inherit;
+  opacity: 0.85;
+  font-size: 0.9rem;
+}
+
+.toc-subsections a:hover {
+  opacity: 1;
+}
+</style>
+
+
+<!-- ========================= -->
+<!-- JavaScript -->
+<!-- ========================= -->
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  const tocSections = document.querySelectorAll(".toc-section");
+
+  tocSections.forEach(section => {
+
+    const button = section.querySelector(".toc-toggle");
+    const subsections = section.querySelector(".toc-subsections");
+
+    // Only enable dropdown if subsections exist
+    if (subsections) {
+
+      button.addEventListener("click", function (e) {
+
+        // Prevent clicking section link from toggling
+        if (e.target.tagName.toLowerCase() === "a") {
+          return;
+        }
+
+        e.preventDefault();
+
+        section.classList.toggle("active");
+      });
+
+    }
+
+  });
+
+});
+</script>
 
       <d-appendix>
         <d-footnote-list></d-footnote-list>
