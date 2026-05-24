@@ -45,7 +45,7 @@ ninja.data = [{
         section: "Posts",
         handler: () => {
           
-            window.location.href = "/blog/2026/VAE-Inspired-Diffusion-Revolution/";
+            window.location.href = "/blog/2026/VAE-Inspired_Diffusion_Revolution/";
           
         },
       },{id: "books-the-godfather",
