@@ -72,8 +72,9 @@
 
     <div class="distill-layout">
 
-      <!-- TOC -->
+      <!-- LEFT SIDEBAR TOC -->
       <aside class="distill-toc">
+
         <nav class="toc-wrapper">
 
           <h3>Contents</h3>
@@ -90,13 +91,17 @@
 
               {% if section.subsections %}
                 <ul class="toc-subsections">
+
                   {% for subsection in section.subsections %}
+
                     <li>
                       <a href="#{{ subsection.name | slugify }}">
                         {{ subsection.name }}
                       </a>
                     </li>
+
                   {% endfor %}
+
                 </ul>
               {% endif %}
 
@@ -109,9 +114,10 @@
           {% endif %}
 
         </nav>
+
       </aside>
 
-      <!-- CONTENT -->
+      <!-- MAIN CONTENT -->
       <div class="distill-content">
         {{ content }}
       </div>
@@ -133,44 +139,51 @@
 
 <style>
 
-/* REMOVE CENTERED ARTICLE CONTAINER */
+/* =========================================
+   OVERRIDE AL-FOLIO DEFAULT CENTERING
+========================================= */
 
 d-article {
   max-width: 100% !important;
-  width: 100% !important;
+  width: 100%;
+}
 
-  margin-left: 0 !important;
-  margin-right: 0 !important;
+.post {
+  max-width: 100% !important;
+}
+
+/* =========================================
+   MAIN LAYOUT
+========================================= */
+
+.distill-layout {
+
+  width: 100%;
+  max-width: 1600px;
+
+  margin: 0 auto;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 4rem;
 
   padding-left: 2rem;
   padding-right: 2rem;
 }
 
-/* MAIN LAYOUT */
-
-.distill-layout {
-
-  display: grid;
-
-  grid-template-columns:
-    260px
-    minmax(0, 850px)
-    1fr;
-
-  column-gap: 3rem;
-
-  align-items: start;
-
-  width: 100%;
-}
-
-/* TOC */
+/* =========================================
+   TOC SIDEBAR
+========================================= */
 
 .distill-toc {
-  width: 260px;
+
+  width: 280px;
+  min-width: 280px;
+
+  flex-shrink: 0;
 }
 
-/* STICKY TOC */
+/* STICKY INNER TOC */
 
 .toc-wrapper {
 
@@ -178,6 +191,7 @@ d-article {
   top: 100px;
 
   max-height: calc(100vh - 120px);
+
   overflow-y: auto;
 
   padding-left: 1rem;
@@ -186,16 +200,24 @@ d-article {
   border-left: 2px solid rgba(120,120,120,0.15);
 }
 
-/* CONTENT */
+/* =========================================
+   CONTENT AREA
+========================================= */
 
 .distill-content {
-  width: 100%;
+
+  flex: 1;
   min-width: 0;
+
+  max-width: 900px;
 }
 
-/* TOC TITLE */
+/* =========================================
+   TOC TITLE
+========================================= */
 
 .toc-wrapper h3 {
+
   margin-top: 0;
   margin-bottom: 1rem;
 
@@ -203,12 +225,16 @@ d-article {
   font-weight: 600;
 }
 
-/* LISTS */
+/* =========================================
+   TOC LIST
+========================================= */
 
 .toc-wrapper ul {
+
   list-style: none;
 
   padding-left: 1rem;
+
   margin-top: 0.3rem;
 }
 
@@ -220,11 +246,14 @@ d-article {
   margin: 0.5rem 0;
 }
 
-/* LINKS */
+/* =========================================
+   LINKS
+========================================= */
 
 .toc-wrapper a {
 
   text-decoration: none;
+
   color: inherit;
 
   font-size: 0.95rem;
@@ -236,9 +265,12 @@ d-article {
   color: var(--global-theme-color);
 }
 
-/* DROPDOWN */
+/* =========================================
+   DROPDOWN SUPPORT
+========================================= */
 
 .toc-toggle {
+
   cursor: pointer;
 
   margin-right: 6px;
@@ -252,25 +284,26 @@ d-article {
   font-weight: 500;
 }
 
-/* SCROLLBAR */
+/* =========================================
+   SCROLLBAR
+========================================= */
 
 .toc-wrapper::-webkit-scrollbar {
   width: 6px;
 }
 
 .toc-wrapper::-webkit-scrollbar-thumb {
+
   background: rgba(120,120,120,0.4);
+
   border-radius: 10px;
 }
 
-/* MOBILE */
+/* =========================================
+   MOBILE
+========================================= */
 
 @media (max-width: 1000px) {
-
-  d-article {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
 
   .distill-layout {
     display: block;
@@ -279,6 +312,11 @@ d-article {
   .distill-toc {
     display: none;
   }
+
+  .distill-content {
+    max-width: 100%;
+  }
+
 }
 
 </style>
@@ -317,7 +355,9 @@ document.addEventListener("DOMContentLoaded", function () {
         toggle.innerHTML = isOpen ? "▸" : "▾";
 
       });
+
     }
+
   });
 
 });
