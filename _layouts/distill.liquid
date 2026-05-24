@@ -77,48 +77,26 @@
 
           <h3>Contents</h3>
 
-           {% if page.toc %}
-
-    <div class="distill-layout">
-
-      <!-- LEFT TOC -->
-
-      <aside class="distill-toc">
-
-        <nav class="toc-wrapper">
-
-          <h3>Contents</h3>
-
           {% if page.toc.size > 0 %}
 
             {% for section in page.toc %}
 
               <div class="toc-section">
-
                 <a href="#{{ section.name | slugify }}">
                   {{ section.name }}
                 </a>
-
               </div>
 
               {% if section.subsections %}
-
                 <ul class="toc-subsections">
-
                   {% for subsection in section.subsections %}
-
                     <li>
-
                       <a href="#{{ subsection.name | slugify }}">
                         {{ subsection.name }}
                       </a>
-
                     </li>
-
                   {% endfor %}
-
                 </ul>
-
               {% endif %}
 
             {% endfor %}
@@ -130,15 +108,10 @@
           {% endif %}
 
         </nav>
-
       </aside>
 
-      <!-- CONTENT -->
-
       <div class="distill-content">
-
         {{ content }}
-
       </div>
 
     </div>
@@ -156,179 +129,118 @@
 </d-article>
 
 
-
 <style>
 
-/* =========================================
-   MAIN LAYOUT
-========================================= */
-
 .distill-layout {
-
-  grid-column: page !important;
-
-  display: grid;
-
-  grid-template-columns: 280px minmax(0, 850px);
-
-  column-gap: 4rem;
-
-  justify-content: start;
-
-  width: 100%;
+  display: flex;
+  gap: 3rem;
+  align-items: flex-start;
 }
 
-/* =========================================
-   LEFT TOC
-========================================= */
+/* LEFT TOC */
 
 .distill-toc {
-
-  grid-column: 1;
+  width: 280px;
+  flex-shrink: 0;
 }
 
-/* =========================================
-   STICKY TOC
-========================================= */
-
 .toc-wrapper {
-
   position: sticky;
-
   top: 100px;
 
   max-height: calc(100vh - 120px);
-
   overflow-y: auto;
 
+  padding-left: 1rem;
   padding-right: 1rem;
+
+  border-left: 2px solid rgba(120,120,120,0.15);
 }
 
-/* =========================================
-   CONTENT
-========================================= */
+/* CONTENT */
 
 .distill-content {
-
-  grid-column: 2;
-
+  flex: 1;
   min-width: 0;
 }
 
-/* =========================================
-   TOC TITLE
-========================================= */
+/* TOC TITLE */
 
 .toc-wrapper h3 {
-
   margin-top: 0;
-
   margin-bottom: 1rem;
-
   font-size: 1rem;
-
   font-weight: 600;
 }
 
-/* =========================================
-   TOC LIST
-========================================= */
+/* LIST */
 
 .toc-wrapper ul {
-
   list-style: none;
-
   padding-left: 1rem;
-
   margin-top: 0.3rem;
 }
 
 .toc-wrapper li {
-
   margin: 0.35rem 0;
 }
 
 .toc-section {
-
   margin: 0.5rem 0;
 }
 
-/* =========================================
-   LINKS
-========================================= */
+/* LINKS */
 
 .toc-wrapper a {
-
   text-decoration: none;
-
   color: inherit;
-
   font-size: 0.95rem;
-
   transition: color 0.2s ease;
 }
 
 .toc-wrapper a:hover {
-
   color: var(--global-theme-color);
 }
 
-/* =========================================
-   DROPDOWN
-========================================= */
+/* DROPDOWN */
 
 .toc-toggle {
-
   cursor: pointer;
-
   margin-right: 6px;
-
   font-size: 0.8rem;
-
   user-select: none;
 }
 
 .has-submenu > a {
-
   font-weight: 500;
 }
 
-/* =========================================
-   SCROLLBAR
-========================================= */
+/* SCROLLBAR */
 
 .toc-wrapper::-webkit-scrollbar {
-
   width: 6px;
 }
 
 .toc-wrapper::-webkit-scrollbar-thumb {
-
   background: rgba(120,120,120,0.4);
-
   border-radius: 10px;
 }
 
-/* =========================================
-   MOBILE
-========================================= */
+/* MOBILE */
 
 @media (max-width: 1000px) {
 
   .distill-layout {
-
     display: block;
   }
 
   .distill-toc {
-
     display: none;
   }
 
 }
 
 </style>
-
 
 
 <script>
