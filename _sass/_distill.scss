@@ -91,7 +91,7 @@ d-article {
     position: sticky;
     top: 80px;
     height: fit-content;
-    
+
     grid-template-columns:
       minmax(8px, 1fr) [toc] auto
       minmax(8px, 1fr) [toc-line] 1px
@@ -117,14 +117,24 @@ d-article {
         font-weight: bold;
       }
       ul {
-        padding-left: 1em;
-        margin-top: 0;
-        margin-bottom: 6px;
-        list-style-type: none;
-        li {
-          margin-bottom: 0.25em;
-        }
-      }
+          padding-left: 1em;
+          margin-top: 0;
+          margin-bottom: 6px;
+          list-style-type: none;
+
+  // Main sections only
+          > li > a {
+            font-weight: 700;
+            }
+
+  // Subsections + subsubsections
+          > li ul li a {
+              font-weight: 400;
+            }   
+          li {
+            margin-bottom: 0.25em;
+  }
+}
     }
     .figcaption {
       line-height: 1.4em;
