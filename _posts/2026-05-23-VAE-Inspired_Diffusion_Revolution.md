@@ -93,7 +93,9 @@ forward passes through the network rather than one. This is an active
 research area, and models like DDIM and consistency models have already
 cut that gap significantly.
 
-## Forward Diffusion process
+--- 
+
+# Forward Diffusion process
 
 Given a data sample \\(\mathbf{x}_0 \sim q(\mathbf{x})\\) drawn from a real
 data distribution, a forward diffusion process is defined by gradually
@@ -183,7 +185,7 @@ distribution is $$\mathcal{N}(0,(\sigma^2_1+\sigma^2_2)I)$$. Here the
 merged standard deviation is
 $$\sqrt{(1 - \alpha_t) + \alpha_t (1-\alpha_{t-1})} = \sqrt{1 - \alpha_t\alpha_{t-1}}$$
 
-### The Noise Schedule
+## The Noise Schedule
 
 The noise schedule, denoted as \\(\{\beta_t\}_{t=1}^{T}\\) determines how
 rapidly image structure is corrupted during the forward diffusion
@@ -253,7 +255,9 @@ process. Despite these advances, linear and cosine schedules remain
 widely adopted because they are simple, stable, and empirically
 effective.
 
-## Connection with Stochastic Gradient Langevin Dynamics (SGLD)
+--- 
+
+# Connection with Stochastic Gradient Langevin Dynamics (SGLD)
 
 Diffusion models are closely related to Stochastic Gradient Langevin
 Dynamics (SGLD), a sampling method originating from statistical physics
@@ -340,7 +344,9 @@ processes, and Bayesian sampling theory. It also explains why diffusion
 sampling behaves as a gradual stochastic refinement process rather than
 direct deterministic generation.
 
-## The Reverse Process: Learning to Denoise
+--- 
+
+# The Reverse Process: Learning to Denoise
 
 The goal of the reverse diffusion process is to invert the forward
 noising procedure. Starting from pure Gaussian noise,
@@ -373,7 +379,7 @@ infeasible.
 To address this, diffusion models learn a parameterized approximation
 \\(p_\theta(x_{t-1}\mid x_t)\\) using a neural network.
 
-### Reverse Conditional Distribution
+## Reverse Conditional Distribution
 
 Although the unconditional reverse process is difficult to compute, the
 reverse conditional becomes tractable if we additionally condition on
@@ -416,7 +422,7 @@ $$
 the posterior mean can be rewritten
 entirely in terms of \\(x_t\\), \\(x_0\\), and the diffusion coefficients.
 
-### Learning the Reverse Process
+## Learning the Reverse Process
 
 During generation, the clean image \\(x_0\\) is unknown, so diffusion models
 approximate the reverse conditional using a neural network:
@@ -463,7 +469,7 @@ This formulation produces stable optimization behavior because the
 network learns a well-scaled Gaussian regression task across all
 timesteps. For readers interested in the full mathematical derivation of the reverse process, there are several excellent resources available. In particular, [Lilan Wang](https://lilianweng.github.io/posts/2021-07-11-diffusion-models/#reverse-diffusion-process) provides a highly accessible explanation in her blog post, and Appendix A of the original 2020 [diffusion paper](https://arxiv.org/abs/2006.11239)  contains a detailed derivation of the underlying equations.
 
-### Variational Learning Objective
+## Variational Learning Objective
 
 The overall diffusion framework is closely related to Variational
 Autoencoders (VAEs). Since the reverse process is probabilistic and
@@ -514,7 +520,9 @@ This simplified denoising objective became one of the key reasons
 diffusion models are stable and scalable for high-quality image
 generation.
 
-## Reverse Diffusion via VAEs
+--- 
+
+# Reverse Diffusion via VAEs
 
 The reverse diffusion process can be understood intuitively by comparing
 diffusion models with Variational Autoencoders (VAEs). Both are
@@ -549,7 +557,7 @@ where:
 Thus, diffusion models can be viewed as performing generation through
 many small decoding steps rather than one large decoding operation.
 
-### Forward Process as the Encoder
+## Forward Process as the Encoder
 
 The forward diffusion process behaves similarly to the encoder in a VAE.
 
@@ -570,7 +578,7 @@ The key difference is that VAEs compress information in a single step,
 while diffusion models corrupt information progressively through many
 small Gaussian perturbations.
 
-### Reverse Process as the Decoder
+## Reverse Process as the Decoder
 
 The reverse diffusion process acts like the decoder of a VAE.
 
@@ -614,7 +622,7 @@ step gradually restores image structure:
 
 -   later steps restore fine textures and details.
 
-### Why the Reverse Process Works
+## Why the Reverse Process Works
 
 The forward process destroys information gradually using Gaussian noise.
 Since each corruption step is small and mathematically tractable, the
@@ -640,7 +648,7 @@ during generation.
 Once the predicted noise is removed, the sample moves slightly closer to
 the clean data manifold.
 
-### Relationship to the ELBO in VAEs
+## Relationship to the ELBO in VAEs
 
 The connection between diffusion models and VAEs becomes even clearer
 through the training objective.
@@ -681,6 +689,8 @@ reconstruct the full image from one compressed latent vector, which can
 produce blurry outputs. Diffusion models avoid this bottleneck by
 distributing the generation process across many incremental refinement
 steps.
+
+--- 
 
 # The U-Net Architecture for Noise Prediction
 
@@ -787,6 +797,8 @@ This naturally creates a coarse-to-fine generation process, where global
 semantic structure emerges first and detailed appearance is
 progressively refined over successive denoising steps.
 
+--- 
+
 # Diffusion Model Algorithm
 
 <div style="text-align:center">
@@ -843,6 +855,8 @@ This algorithm generates new images using the trained model.
 5.  Repeat the process gradually.
 
 6.  The random noise slowly turns into a realistic image.
+
+--- 
 
 # Key Parameters in Diffusion Models
 
@@ -984,9 +998,13 @@ Modern diffusion systems are largely engineered around carefully
 balancing these competing objectives to achieve scalable, high-quality
 generation.
 
+--- 
+
 # Conclusion
 
 Diffusion models offer a powerful alternative to GANs and VAEs by trading a single-step generator for a sequence of small, stable denoising steps. This gradual reverse process avoids adversarial collapse and the blurriness caused by one-shot latent reconstruction. By framing generation as iterative refinement, diffusion models can capture rich multimodal structure and produce sharp, realistic samples. The U-Net noise predictor is a key ingredient, enabling the model to adapt to different noise levels and restore both global layout and fine detail. Noise schedules like cosine help allocate learning where it matters most, while guidance and latent compression balance fidelity, control, and efficiency. In practice, diffusion models have become the dominant approach for high-quality image synthesis because they combine theoretical grounding with strong empirical performance. Future improvements will continue to narrow the speed gap while preserving their stability and expressiveness.
+
+--- 
 
 # References
 
@@ -1005,5 +1023,3 @@ Diffusion models offer a powerful alternative to GANs and VAEs by trading a sing
 7. Ronneberger, O., Fischer, P., & Brox, T. (2015). *U-Net: Convolutional Networks for Biomedical Image Segmentation*. arXiv:1505.04597.
 
 8. Erdem, K. (2023). *Step by Step Visual Introduction to Diffusion Models*. Retrieved from https://erdem.pl/2023/11/step-by-step-visual-introduction-to-diffusion-models
-
-# Citation
