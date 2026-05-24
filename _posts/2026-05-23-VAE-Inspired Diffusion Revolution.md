@@ -4,54 +4,8 @@ title: VAE-Inspired Diffusion Revolution
 date: 2026-05-23
 description: This blog explains how diffusion models overcome VAE blurriness by generating images through gradual denoising, while also showing the conceptual connection to VAE-style latent modeling. It compares the stability and generative strengths of diffusion models with traditional approaches and highlights why their stepwise reverse process is so powerful.
 thumbnail: assets/img/thumbnail_diffusion.png
-
 toc:
-  - name: Why Diffusion Models?
-    subsections:
-      - name: Why not just stick with GANs?
-      - name: Why not just stick with VAEs?
-      - name: The gap that diffusion models fill
-  - name: Diffusion Models - Introduction
-    subsections:
-      - name: Forward Diffusion process
-        subsubsections:
-          - name: The Noise Schedule
-      - name: Connection with Stochastic Gradient Langevin Dynamics (SGLD)
-      - name: The Reverse Process: Learning to Denoise
-        subsubsections:
-          - name: Reverse Conditional Distribution
-          - name: Learning the Reverse Process
-          - name: Variational Learning Objective
-      - name: Reverse Diffusion via VAEs
-        subsubsections:
-          - name: Forward Process as the Encoder
-          - name: Reverse Process as the Decoder
-          - name: Why the Reverse Process Works
-          - name: Relationship to the ELBO in VAEs
-  - name: The U-Net Architecture for Noise Prediction
-    subsections:
-      - name: Diffusion-Specific Adaptations
-        subsubsections:
-          - name: Timestep Embeddings
-          - name: Residual Blocks
-          - name: Self-Attention Layers
-          - name: Group Normalization
-      - name: Multi-Scale Denoising Behavior
-  - name: Diffusion Model Algorithm
-    subsections:
-      - name: Training
-      - name: Sampling / Image Generation
-  - name: Key Parameters in Diffusion Models
-    subsections:
-      - name: Number of Timesteps $(T)$
-      - name: Noise Schedule $(\beta_t)$
-      - name: Guidance Scale $(w)$
-      - name: Latent Compression Factor
-      - name: U-Net Attention Resolution
-      - name: VAE Regularization Strength
-      - name: Tradeoffs Between Parameters
-  - name: Conclusion
-  - name: References
+  sidebar: left
 ---
 
 
