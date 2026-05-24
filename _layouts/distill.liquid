@@ -100,6 +100,10 @@
         {{ content }}
       </d-article>
 
+{% if page.citation %}
+  {% include citation.liquid %}
+{% endif %}
+
       <d-appendix>
         <d-footnote-list></d-footnote-list>
         <d-citation-list></d-citation-list>
