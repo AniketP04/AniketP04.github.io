@@ -5,7 +5,7 @@ date: 2026-05-23
 description: This blog explains how diffusion models overcome VAE blurriness by generating images through gradual denoising, while also showing the conceptual connection to VAE-style latent modeling. It compares the stability and generative strengths of diffusion models with traditional approaches and highlights why their stepwise reverse process is so powerful.
 thumbnail: assets/img/thumbnail_diffusion.png
 bibliography: diffusion.bib
-toc: true
+# toc: true
 citation: true
 ---
 
