@@ -4,7 +4,6 @@ title: VAE-Inspired Diffusion Revolution
 date: 2026-05-23
 description: This blog explains how diffusion models overcome VAE blurriness by generating images through gradual denoising, while also showing the conceptual connection to VAE-style latent modeling. It compares the stability and generative strengths of diffusion models with traditional approaches and highlights why their stepwise reverse process is so powerful.
 thumbnail: assets/img/thumbnail_diffusion.png
-citation: true
 toc: true
 ---
 
@@ -25,6 +24,15 @@ on thousands of distinct faces and end up with a generator that produces
 variations of the same three faces. Controlling what a GAN generates is
 also notoriously difficult; conditioning it precisely on text prompts or
 semantic attributes requires significant architectural gymnastics.
+
+<div style="text-align:center;font-size:15px;">
+<div class="l-body">
+    <img class="img-fluid" src="https://upload.wikimedia.org/wikipedia/commons/d/d4/Thomas_Bayes.gif">
+</div>
+<i>
+A portrait of Thomas Bayes (maybe). 
+Source: <a href="https://commons.wikimedia.org/wiki/File:Thomas_Bayes.gif">Unknown author</a>, Public domain, via Wikimedia Commons.</i>
+</div>
 
 ## Why not just stick with VAEs?
 
@@ -1007,26 +1015,3 @@ Diffusion models offer a powerful alternative to GANs and VAEs by trading a sing
 7. Ronneberger, O., Fischer, P., & Brox, T. (2015). *U-Net: Convolutional Networks for Biomedical Image Segmentation*. arXiv:1505.04597.
 
 8. Erdem, K. (2023). *Step by Step Visual Introduction to Diffusion Models*. Retrieved from https://erdem.pl/2023/11/step-by-step-visual-introduction-to-diffusion-models
-
-
-# Citation
-
-If you found this useful, please cite this as:
-
-{% capture citation_quote -%}
-> {{ site.last_name }}, {{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} ({{ page.date | date: "%b %Y" }}). {{ page.title }}. {% if site.title != 'blank' %}{{ site.title }}. {% endif %}{{ site.url }}.
-{%- endcapture %}
-{{ citation_quote | markdownify }}
-
-OR
-
-```bibtex
-@article{ {{ site.last_name | downcase }}{{ page.date | date: "%Y" }}{{ page.title | slugify }},
-  title   = { {{ page.title }} },
-  author  = { {{ site.last_name }}, {{ site.first_name }}{% if site.middle_name %} {{ site.middle_name }}{% endif %} },{% if site.title != 'blank' %}journal = { {{ site.title }} },{% endif %}
-  blog = { {{site.url}} },
-  year    = { {{ page.date | date: "%Y" }} },
-  month   = { {{ page.date | date: "%b" }} },
-  url     = { {{ site.url }}{{ page.url }} }
-}
-```
