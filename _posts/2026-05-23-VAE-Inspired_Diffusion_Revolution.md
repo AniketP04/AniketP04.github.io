@@ -63,7 +63,7 @@ VAEs are great at understanding and manipulating the latent structure of
 data, but if you want outputs that look photographic and crisp, they
 fall short.
 
-## The gap that diffusion models fill
+## The gap that diffusion models fill.
 
 Both failure modes — GAN instability and VAE blurriness — stem from
 trying to map directly between a data distribution and a latent code in

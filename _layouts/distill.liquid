@@ -67,58 +67,11 @@
       {% endif %}
 
       <d-article>
-  {% if page.toc and page.toc.size > 0 %}
+
+  {% if page.toc %}
 
     <d-contents>
 
-      <!-- Added toc-wrapper class -->
-      <nav class="l-text figcaption toc-wrapper">
-
-        <h3>Contents</h3>
-
-        {% for section in page.toc %}
-
-          <!-- Section -->
-          <div class="toc-section">
-
-            <div class="toc-item">
-
-              <a href="#{{ section.name | slugify }}">
-                {{ section.name }}
-              </a>
-
-            </div>
-
-            <!-- Subsections -->
-            {% if section.subsections %}
-
-              <ul class="toc-subsections">
-
-                {% for subsection in section.subsections %}
-
-                  <li>
-                    <a href="#{{ subsection.name | slugify }}">
-                      {{ subsection.name }}
-                    </a>
-                  </li>
-
-                {% endfor %}
-
-              </ul>
-
-            {% endif %}
-
-          </div>
-
-        {% endfor %}
-
-      </nav>
-
-    </d-contents>
-
-  {% elsif page.toc == true %}
-
-    <d-contents>
       <nav class="l-text figcaption toc-wrapper">
 
         <h3>Contents</h3>
@@ -126,6 +79,7 @@
         {% toc %}
 
       </nav>
+
     </d-contents>
 
   {% endif %}
@@ -134,7 +88,9 @@
 
 </d-article>
 
-
+{% if page.citation %}
+  {% include citation.liquid %}
+{% endif %}
 
 <!-- ========================= -->
 <!-- CSS -->
@@ -158,7 +114,7 @@ d-contents {
   scrollbar-width: thin;
 }
 
-/* Optional nicer scrollbar */
+/* Scrollbar */
 
 d-contents::-webkit-scrollbar {
   width: 6px;
@@ -170,51 +126,72 @@ d-contents::-webkit-scrollbar-thumb {
 }
 
 /* ========================= */
-/* TOC dropdown arrow */
+/* TOC Styling */
 /* ========================= */
 
-.toc-toggle {
-  cursor: pointer;
-  margin-right: 6px;
-  font-size: 0.8rem;
-  user-select: none;
-  display: inline-block;
-  width: 12px;
+.toc-wrapper ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
 }
 
-/* Section title */
-
-.has-submenu > a {
-  font-weight: 600;
-}
-
-/* Subsection spacing */
-
-.toc-subsections {
-  margin-top: 4px;
-  margin-bottom: 8px;
-  padding-left: 18px;
-}
-
-/* Subsection links */
-
-.toc-subsections li {
+.toc-wrapper li {
   margin: 4px 0;
 }
 
-.toc-subsections a {
-  text-decoration: none;
+/* Nested subsections */
+
+.toc-wrapper li ul {
+  margin-top: 4px;
+  margin-bottom: 8px;
+  padding-left: 18px;
+
+  display: none;
 }
 
-/* Hover */
+/* Links */
+
+.toc-wrapper a {
+  text-decoration: none;
+}
 
 .toc-wrapper a:hover {
   opacity: 0.8;
 }
 
+/* ========================= */
+/* TOC Item Layout */
+/* ========================= */
+
+.toc-item {
+  display: flex;
+  align-items: center;
+}
+
+/* Toggle button */
+
+.toc-toggle {
+  border: none;
+  background: none;
+
+  cursor: pointer;
+
+  margin-right: 6px;
+  padding: 0;
+
+  font-size: 0.8rem;
+  line-height: 1;
+
+  user-select: none;
+}
+
+/* Open state */
+
+.toc-open > ul {
+  display: block !important;
+}
+
 </style>
-
-
 
 <!-- ========================= -->
 <!-- JavaScript -->
@@ -224,50 +201,58 @@ d-contents::-webkit-scrollbar-thumb {
 
 document.addEventListener("DOMContentLoaded", function () {
 
-  // Find all sections
-  const tocSections = document.querySelectorAll(".toc-section");
+  // Find all TOC list items
+  const tocItems = document.querySelectorAll(".toc-wrapper li");
 
-  tocSections.forEach((section) => {
+  tocItems.forEach((item) => {
 
-    // Find subsection list
-    const subList = section.querySelector(".toc-subsections");
+    // Direct child UL only
+    const subList = item.querySelector(":scope > ul");
 
-    // Only apply dropdown if subsection exists
-    if (subList) {
+    // Skip if no subsection
+    if (!subList) return;
 
-      const tocItem = section.querySelector(".toc-item");
+    // Direct child link
+    const link = item.querySelector(":scope > a");
 
-      // Add class
-      tocItem.classList.add("has-submenu");
+    if (!link) return;
 
-      // Create dropdown arrow
-      const toggle = document.createElement("span");
+    // Create wrapper div
+    const wrapper = document.createElement("div");
+    wrapper.classList.add("toc-item");
 
-      toggle.classList.add("toc-toggle");
+    // Create toggle button
+    const toggle = document.createElement("button");
 
-      // Closed by default
-      toggle.innerHTML = "▸";
+    toggle.classList.add("toc-toggle");
+    toggle.setAttribute("aria-expanded", "false");
 
-      // Insert arrow before section link
-      tocItem.insertBefore(toggle, tocItem.querySelector("a"));
+    toggle.innerHTML = "▸";
 
-      // Hide subsection initially
-      subList.style.display = "none";
+    // Replace link with wrapper
+    item.insertBefore(wrapper, link);
 
-      // Toggle open/close
-      toggle.addEventListener("click", function (e) {
+    wrapper.appendChild(toggle);
+    wrapper.appendChild(link);
 
-        e.stopPropagation();
+    // Toggle behavior
+    toggle.addEventListener("click", function (e) {
 
-        const isOpen = getComputedStyle(subList).display !== "none";
+      e.preventDefault();
+      e.stopPropagation();
 
-        subList.style.display = isOpen ? "none" : "block";
+      const isOpen = item.classList.contains("toc-open");
 
-        toggle.innerHTML = isOpen ? "▸" : "▾";
+      item.classList.toggle("toc-open");
 
-      });
+      toggle.innerHTML = isOpen ? "▸" : "▾";
 
-    }
+      toggle.setAttribute(
+        "aria-expanded",
+        !isOpen
+      );
+
+    });
 
   });
 
