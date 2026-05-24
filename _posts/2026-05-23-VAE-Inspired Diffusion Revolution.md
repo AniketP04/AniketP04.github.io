@@ -4,8 +4,9 @@ title: VAE-Inspired Diffusion Revolution
 date: 2026-05-23
 description: This blog explains how diffusion models overcome VAE blurriness by generating images through gradual denoising, while also showing the conceptual connection to VAE-style latent modeling. It compares the stability and generative strengths of diffusion models with traditional approaches and highlights why their stepwise reverse process is so powerful.
 thumbnail: assets/img/thumbnail_diffusion.png
-toc:
-  sidebar: left
+bibliography: 2026-05-23-VAE-Inspired Diffusion Revolution.bib
+toc: true
+citation: true
 ---
 
 
@@ -79,13 +80,13 @@ contrast to VAE and flow-based models, diffusion models follow a
 predefined training procedure, and their latent variables maintain the
 same high dimensionality as the original data.
 
-<figure style="text-align:center;">
-  <img src="/assets/img/diffusion_blog/diffusion_model.png"
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/diffusion_model.png"
        style="width:100%; max-width:930px; height:auto;">
-     <div class="caption">
-    Overview of the diffusion model framework.
 </div>
-</figure>
+<i> Overview of the diffusion model framework. </i>
+</div>
 
 Diffusion Models are a class of generative models designed to produce
 data that resembles the data used during training. They operate by
@@ -129,12 +130,12 @@ The data sample \\(x_0\\) gradually loses its distinguishable features as
 the step \\(t\\) becomes larger. Eventually when \\(T \to \infty\\), \\(x_T\\) is
 equivalent to an isotropic Gaussian distribution.
 
-<div class="figure" style="text-align:center;">
-  <img src="/assets/img/diffusion_blog/forward_pro.png"
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/forward_pro.png"
        style="width:100%; max-width:930px; height:auto;">
-    </div>
-       <div class="caption">
-    Forward diffusion process progressively adding noise to the data.
+</div>
+<i> Forward diffusion process progressively adding noise to the data. </i>
 </div>
 
 A key mathematical property makes diffusion models computationally
@@ -201,13 +202,13 @@ information is concentrated, while later timesteps spend excessive
 effort modeling nearly pure Gaussian noise. As a result, many denoising
 steps contribute little useful learning signal.
 
-<figure style="text-align:center;">
-  <img src="/assets/img/diffusion_blog/linear.jpg"
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/linear.jpg"
        style="width:100%; max-width:930px; height:auto;">
-       <div class="caption">
-    Linear noise schedule in the diffusion process.
 </div>
-</figure>
+<i> Linear noise schedule in the diffusion process. </i>
+</div>
 
 To overcome this issue, Nichol and Dhariwal introduced the **cosine
 schedule**, which defines the cumulative noise parameter
@@ -235,13 +236,13 @@ trajectory before progressively increasing the corruption rate. This
 allocates more training steps to intermediate noise levels, where the
 model can learn richer and more meaningful image structure.
 
-<figure style="text-align:center;">
-  <img src="/assets/img/diffusion_blog/cosine.jpg"
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/cosine.jpg"
        style="width:100%; max-width:930px; height:auto;">
-       <div class="caption">
-    Cosine noise schedule used in diffusion models.
 </div>
-</figure>
+<i> Cosine noise schedule used in diffusion models. </i>
+</div>
 
 In practice, cosine schedules consistently produce higher-quality
 samples than linear schedules, particularly for high-resolution image
@@ -271,13 +272,13 @@ combining two components:
 2.  Injected Gaussian noise that maintains stochastic exploration and
     prevents collapse to a single mode.
 
-<figure style="text-align:center;">
-  <img src="/assets/img/diffusion_blog/coonection_sgld_diffusion.png"
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/coonection_sgld_diffusion.png"
        style="width:100%; max-width:930px; height:auto;">
-       <div class="caption">
-    Connection between SGLD and diffusion-based sampling.
 </div>
-</figure>
+<i> Connection between SGLD and diffusion-based sampling. </i>
+</div>
 
 The update rule for SGLD is:
 
@@ -349,13 +350,13 @@ noising procedure. Starting from pure Gaussian noise,
 \\(x_T \sim \mathcal{N}(0, I)\\), the model progressively removes noise to
 reconstruct a clean sample \\(x_0\\).
 
-<figure style="text-align:center;">
-  <img src="/assets/img/diffusion_blog/reverse_diffusion.png"
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/reverse_diffusion.png"
        style="width:100%; max-width:930px; height:auto;">
-       <div class="caption">
-    Reverse diffusion process from noise to generated sample.
 </div>
-</figure>
+<i> Reverse diffusion process from noise to generated sample. </i>
+</div>
 
 If we could exactly model the reverse transition probabilities
 \\(q(x_{t-1}\mid x_t)\\), then we could generate realistic data samples
@@ -588,13 +589,13 @@ $$p_\theta(x_{t-1} \mid x_t)$$
 
 which reconstructs a slightly cleaner image from a noisier one.
 
-<figure style="text-align:center;">
-  <img src="/assets/img/diffusion_blog/reverse_diff.png"
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/reverse_diff.png"
        style="width:100%; max-width:930px; height:auto;">
-       <div class="caption">
-    Reverse diffusion process across timesteps.
 </div>
-</figure>
+<i> Reverse diffusion process across timesteps. </i>
+</div>
 
 Instead of generating the image in a single step, the diffusion model
 repeatedly performs small denoising operations:
@@ -700,13 +701,13 @@ transforming the image into increasingly abstract feature
 representations. Early layers capture fine local details such as edges
 and textures, while deeper layers encode higher-level global structure.
 
-<figure style="text-align:center;">
-  <img src="/assets/img/diffusion_blog/architecutre.png"
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/architecutre.png"
        style="width:100%; max-width:930px; height:auto;">
-       <div class="caption">
-    Architecture of the diffusion model.
 </div>
-</figure>
+<i> Architecture of the diffusion model. </i>
+</div>
 
 The decoder then progressively upsamples these compressed
 representations back to the original image resolution using transposed
@@ -791,13 +792,13 @@ progressively refined over successive denoising steps.
 
 # Diffusion Model Algorithm
 
-<figure style="text-align:center;">
-  <img src="/assets/img/diffusion_blog/algorithm.png"
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/algorithm.png"
        style="width:100%; max-width:930px; height:auto;">
-            <div class="caption">
-Diffusion model training and sampling algorithm.
 </div>
-</figure>
+<i> Diffusion model training and sampling algorithm. </i>
+</div>
 
 ## Training
 
