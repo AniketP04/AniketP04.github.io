@@ -67,304 +67,38 @@
       {% endif %}
 
       <d-article>
+        {% if page.toc and page.toc.size > 0 %}
+          <d-contents>
+            <nav class="l-text figcaption">
+              <h3>Contents</h3>
+              {% for section in page.toc %}
+                <div>
+                  <a href="#{{ section.name | slugify }}">{{ section.name }}</a>
+                </div>
+                {% if section.subsections %}
+                  <ul>
+                    {% for subsection in section.subsections %}
+                      <li>
+                        <a href="#{{ subsection.name | slugify }}">{{ subsection.name }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endfor %}
+            </nav>
+          </d-contents>
 
-  {% if page.toc %}
+        {% elsif page.toc == true %}
+          <d-contents>
+            <nav class="l-text figcaption">
+              <h3>Contents</h3>
+              {% toc %}
+            </nav>
+          </d-contents>
+        {% endif %}
 
-    <div class="distill-layout">
-
-      <!-- LEFT SIDEBAR TOC -->
-      <aside class="distill-toc">
-
-        <nav class="toc-wrapper">
-
-          <h3>Contents</h3>
-
-          {% if page.toc.size > 0 %}
-
-            {% for section in page.toc %}
-
-              <div class="toc-section">
-                <a href="#{{ section.name | slugify }}">
-                  {{ section.name }}
-                </a>
-              </div>
-
-              {% if section.subsections %}
-                <ul class="toc-subsections">
-
-                  {% for subsection in section.subsections %}
-
-                    <li>
-                      <a href="#{{ subsection.name | slugify }}">
-                        {{ subsection.name }}
-                      </a>
-                    </li>
-
-                  {% endfor %}
-
-                </ul>
-              {% endif %}
-
-            {% endfor %}
-
-          {% else %}
-
-            {% toc %}
-
-          {% endif %}
-
-        </nav>
-
-      </aside>
-
-      <!-- MAIN CONTENT -->
-      <div class="distill-content">
         {{ content }}
-      </div>
-
-    </div>
-
-  {% else %}
-
-    {{ content }}
-
-  {% endif %}
-
-  {% if page.citation %}
-    {% include citation.liquid %}
-  {% endif %}
-
-</d-article>
-
-
-<style>
-
-/* =========================================
-   OVERRIDE AL-FOLIO DEFAULT CENTERING
-========================================= */
-
-d-article {
-  max-width: 100% !important;
-  width: 100%;
-}
-
-.post {
-  max-width: 100% !important;
-}
-
-/* =========================================
-   MAIN LAYOUT
-========================================= */
-
-.distill-layout {
-
-  width: 100%;
-  max-width: 1600px;
-
-  margin: 0 auto;
-
-  display: flex;
-  align-items: flex-start;
-  gap: 4rem;
-
-  padding-left: 2rem;
-  padding-right: 2rem;
-}
-
-/* =========================================
-   TOC SIDEBAR
-========================================= */
-
-.distill-toc {
-
-  width: 280px;
-  min-width: 280px;
-
-  flex-shrink: 0;
-}
-
-/* STICKY INNER TOC */
-
-.toc-wrapper {
-
-  position: sticky;
-  top: 100px;
-
-  max-height: calc(100vh - 120px);
-
-  overflow-y: auto;
-
-  padding-left: 1rem;
-  padding-right: 1rem;
-
-  border-left: 2px solid rgba(120,120,120,0.15);
-}
-
-/* =========================================
-   CONTENT AREA
-========================================= */
-
-.distill-content {
-
-  flex: 1;
-  min-width: 0;
-
-  max-width: 900px;
-}
-
-/* =========================================
-   TOC TITLE
-========================================= */
-
-.toc-wrapper h3 {
-
-  margin-top: 0;
-  margin-bottom: 1rem;
-
-  font-size: 1rem;
-  font-weight: 600;
-}
-
-/* =========================================
-   TOC LIST
-========================================= */
-
-.toc-wrapper ul {
-
-  list-style: none;
-
-  padding-left: 1rem;
-
-  margin-top: 0.3rem;
-}
-
-.toc-wrapper li {
-  margin: 0.35rem 0;
-}
-
-.toc-section {
-  margin: 0.5rem 0;
-}
-
-/* =========================================
-   LINKS
-========================================= */
-
-.toc-wrapper a {
-
-  text-decoration: none;
-
-  color: inherit;
-
-  font-size: 0.95rem;
-
-  transition: color 0.2s ease;
-}
-
-.toc-wrapper a:hover {
-  color: var(--global-theme-color);
-}
-
-/* =========================================
-   DROPDOWN SUPPORT
-========================================= */
-
-.toc-toggle {
-
-  cursor: pointer;
-
-  margin-right: 6px;
-
-  font-size: 0.8rem;
-
-  user-select: none;
-}
-
-.has-submenu > a {
-  font-weight: 500;
-}
-
-/* =========================================
-   SCROLLBAR
-========================================= */
-
-.toc-wrapper::-webkit-scrollbar {
-  width: 6px;
-}
-
-.toc-wrapper::-webkit-scrollbar-thumb {
-
-  background: rgba(120,120,120,0.4);
-
-  border-radius: 10px;
-}
-
-/* =========================================
-   MOBILE
-========================================= */
-
-@media (max-width: 1000px) {
-
-  .distill-layout {
-    display: block;
-  }
-
-  .distill-toc {
-    display: none;
-  }
-
-  .distill-content {
-    max-width: 100%;
-  }
-
-}
-
-</style>
-
-
-<script>
-
-document.addEventListener("DOMContentLoaded", function () {
-
-  const tocItems = document.querySelectorAll(".toc-wrapper li");
-
-  tocItems.forEach((item) => {
-
-    const subList = item.querySelector("ul");
-
-    if (subList) {
-
-      item.classList.add("has-submenu");
-
-      const toggle = document.createElement("span");
-
-      toggle.classList.add("toc-toggle");
-
-      toggle.innerHTML = "▾";
-
-      item.insertBefore(toggle, item.firstChild);
-
-      subList.style.display = "block";
-
-      toggle.addEventListener("click", () => {
-
-        const isOpen = subList.style.display === "block";
-
-        subList.style.display = isOpen ? "none" : "block";
-
-        toggle.innerHTML = isOpen ? "▸" : "▾";
-
-      });
-
-    }
-
-  });
-
-});
-
-</script>
-
-
+      </d-article>
 
       <d-appendix>
         <d-footnote-list></d-footnote-list>
