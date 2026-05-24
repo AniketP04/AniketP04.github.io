@@ -67,30 +67,45 @@
       {% endif %}
 
       <d-article>
+        {% if page.toc and page.toc.size > 0 %}
+          <d-contents>
+            <nav class="l-text figcaption">
+              <h3>Contents</h3>
+              {% for section in page.toc %}
+                <div>
+                  <a href="#{{ section.name | slugify }}">{{ section.name }}</a>
+                </div>
+                {% if section.subsections %}
+                  <ul>
+                    {% for subsection in section.subsections %}
+                      <li>
+                        <a href="#{{ subsection.name | slugify }}">{{ subsection.name }}</a>
+                      </li>
+                    {% endfor %}
+                  </ul>
+                {% endif %}
+              {% endfor %}
+            </nav>
+          </d-contents>
 
-  {% if page.toc %}
+        {% elsif page.toc == true %}
+          <d-contents>
+            <nav class="l-text figcaption">
+              <h3>Contents</h3>
+              {% toc %}
+            </nav>
+          </d-contents>
+        {% endif %}
 
-    <d-contents>
-
-      <nav class="l-text figcaption toc-wrapper">
-
-        <h3>Contents</h3>
-
-        {% toc %}
-
-      </nav>
-
-    </d-contents>
-
-  {% endif %}
-
-  {{ content }}
-
-</d-article>
+        {{ content }}
 
 {% if page.citation %}
   {% include citation.liquid %}
 {% endif %}
+
+      </d-article>
+
+
 
 <!-- ========================= -->
 <!-- CSS -->
