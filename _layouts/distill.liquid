@@ -67,38 +67,156 @@
       {% endif %}
 
       <d-article>
-        {% if page.toc and page.toc.size > 0 %}
-          <d-contents>
-            <nav class="l-text figcaption">
-              <h3>Contents</h3>
-              {% for section in page.toc %}
-                <div>
-                  <a href="#{{ section.name | slugify }}">{{ section.name }}</a>
-                </div>
-                {% if section.subsections %}
-                  <ul>
-                    {% for subsection in section.subsections %}
-                      <li>
-                        <a href="#{{ subsection.name | slugify }}">{{ subsection.name }}</a>
-                      </li>
-                    {% endfor %}
-                  </ul>
-                {% endif %}
-              {% endfor %}
-            </nav>
-          </d-contents>
+  {% if page.toc and page.toc.size > 0 %}
 
-        {% elsif page.toc == true %}
-          <d-contents>
-            <nav class="l-text figcaption">
-              <h3>Contents</h3>
-              {% toc %}
-            </nav>
-          </d-contents>
-        {% endif %}
+    <!-- TOC STYLE -->
+    <style>
+      d-contents nav {
+        font-size: 0.9rem;
+      }
 
-        {{ content }}
-      </d-article>
+      .toc-section {
+        margin-bottom: 0.5rem;
+      }
+
+      .toc-header {
+        display: flex;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        gap: 0.4rem;
+      }
+
+      .toc-toggle {
+        width: 14px;
+        display: inline-block;
+        transition: transform 0.2s ease;
+        font-size: 0.75rem;
+      }
+
+      .toc-toggle.open {
+        transform: rotate(90deg);
+      }
+
+      .toc-link {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .toc-subsections {
+        margin-top: 0.3rem;
+        margin-left: 1rem;
+        padding-left: 0.8rem;
+        border-left: 1px solid #ccc;
+
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.25s ease;
+      }
+
+      .toc-subsections.open {
+        max-height: 500px;
+      }
+
+      .toc-subsections li {
+        margin: 0.3rem 0;
+      }
+
+      .toc-subsections a {
+        text-decoration: none;
+        color: inherit;
+        font-size: 0.82rem;
+      }
+
+      .toc-subsections a:hover,
+      .toc-link:hover {
+        color: #007acc;
+      }
+    </style>
+
+    <d-contents>
+      <nav class="l-text figcaption">
+        <h3>Contents</h3>
+
+        {% for section in page.toc %}
+          <div class="toc-section">
+
+            <!-- SECTION HEADER -->
+            <div class="toc-header">
+
+              {% if section.subsections %}
+                <span class="toc-toggle">▶</span>
+              {% else %}
+                <span class="toc-toggle"></span>
+              {% endif %}
+
+              <a
+                class="toc-link"
+                href="#{{ section.name | slugify }}"
+              >
+                {{ section.name }}
+              </a>
+            </div>
+
+            <!-- SUBSECTIONS -->
+            {% if section.subsections %}
+              <ul class="toc-subsections">
+                {% for subsection in section.subsections %}
+                  <li>
+                    <a href="#{{ subsection.name | slugify }}">
+                      {{ subsection.name }}
+                    </a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+
+          </div>
+        {% endfor %}
+      </nav>
+    </d-contents>
+
+    <!-- TOC SCRIPT -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+
+        const headers = document.querySelectorAll(".toc-header");
+
+        headers.forEach(header => {
+
+          const toggle = header.querySelector(".toc-toggle");
+          const subsectionList =
+            header.parentElement.querySelector(".toc-subsections");
+
+          if (!subsectionList) return;
+
+          header.addEventListener("click", function (e) {
+
+            // prevent toggling when clicking actual link
+            if (e.target.tagName.toLowerCase() === "a") {
+              return;
+            }
+
+            subsectionList.classList.toggle("open");
+            toggle.classList.toggle("open");
+          });
+        });
+      });
+    </script>
+
+  {% elsif page.toc == true %}
+
+    <d-contents>
+      <nav class="l-text figcaption">
+        <h3>Contents</h3>
+        {% toc %}
+      </nav>
+    </d-contents>
+
+  {% endif %}
+
+  {{ content }}
+</d-article>
 
       <d-appendix>
         <d-footnote-list></d-footnote-list>
