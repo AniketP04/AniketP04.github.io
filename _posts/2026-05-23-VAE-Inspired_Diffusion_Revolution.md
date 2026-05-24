@@ -25,6 +25,7 @@ same high dimensionality as the original data.
 </div>
 <i> Overview of the diffusion model framework. </i>
 </div>
+<br>
 
 Diffusion Models are a class of generative models designed to produce
 data that resembles the data used during training. They operate by
@@ -86,6 +87,7 @@ blurring them together.
 </div>
 <i> Comparison between GANs, VAEs, and Diffusion Models. </i>
 </div>
+<br>  
 
 The one trade-off is speed: generating an image requires hundreds of
 forward passes through the network rather than one. This is an active
@@ -135,6 +137,7 @@ equivalent to an isotropic Gaussian distribution.
 </div>
 <i> Forward diffusion process progressively adding noise to the data. </i>
 </div>
+<br> 
 
 A key mathematical property makes diffusion models computationally
 efficient: the noisy image at any timestep \\(t\\) can be computed directly
@@ -207,6 +210,7 @@ steps contribute little useful learning signal.
 </div>
 <i> Linear noise schedule in the diffusion process. </i>
 </div>
+<br> 
 
 To overcome this issue, Nichol and Dhariwal introduced the **cosine
 schedule**, which defines the cumulative noise parameter
@@ -241,6 +245,7 @@ model can learn richer and more meaningful image structure.
 </div>
 <i> Cosine noise schedule used in diffusion models. </i>
 </div>
+<br>
 
 In practice, cosine schedules consistently produce higher-quality
 samples than linear schedules, particularly for high-resolution image
@@ -279,6 +284,7 @@ combining two components:
 </div>
 <i> Connection between SGLD and diffusion-based sampling. </i>
 </div>
+<br>
 
 The update rule for SGLD is:
 
@@ -359,6 +365,7 @@ reconstruct a clean sample \\(x_0\\).
 </div>
 <i> Reverse diffusion process from noise to generated sample. </i>
 </div>
+<br>
 
 If we could exactly model the reverse transition probabilities
 \\(q(x_{t-1}\mid x_t)\\), then we could generate realistic data samples
@@ -600,6 +607,7 @@ which reconstructs a slightly cleaner image from a noisier one.
 </div>
 <i> Reverse diffusion process across timesteps. </i>
 </div>
+<br>
 
 Instead of generating the image in a single step, the diffusion model
 repeatedly performs small denoising operations:
@@ -714,6 +722,7 @@ and textures, while deeper layers encode higher-level global structure.
 </div>
 <i> Architecture of the diffusion model. </i>
 </div>
+<br>
 
 The decoder then progressively upsamples these compressed
 representations back to the original image resolution using transposed
@@ -807,6 +816,7 @@ progressively refined over successive denoising steps.
 </div>
 <i> Diffusion model training and sampling algorithm. </i>
 </div>
+<br>
 
 ## Training
 

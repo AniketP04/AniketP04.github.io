@@ -249,7 +249,7 @@ document.addEventListener("DOMContentLoaded", function () {
       toggle.innerHTML = "▸";
 
       // Insert arrow before section link
-      tocItem.insertBefore(toggle, tocItem.firstChild);
+      tocItem.insertBefore(toggle, tocItem.querySelector("a"));
 
       // Hide subsection initially
       subList.style.display = "none";
@@ -259,7 +259,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
         e.stopPropagation();
 
-        const isOpen = subList.style.display === "block";
+        const isOpen = getComputedStyle(subList).display !== "none";
 
         subList.style.display = isOpen ? "none" : "block";
 
