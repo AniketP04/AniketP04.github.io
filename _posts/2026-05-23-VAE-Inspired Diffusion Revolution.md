@@ -129,13 +129,13 @@ The data sample \\(x_0\\) gradually loses its distinguishable features as
 the step \\(t\\) becomes larger. Eventually when \\(T \to \infty\\), \\(x_T\\) is
 equivalent to an isotropic Gaussian distribution.
 
-<figure style="text-align:center;">
+<div class="figure" style="text-align:center;">
   <img src="/assets/img/diffusion_blog/forward_pro.png"
        style="width:100%; max-width:930px; height:auto;">
+    </div>
        <div class="caption">
     Forward diffusion process progressively adding noise to the data.
 </div>
-</figure>
 
 A key mathematical property makes diffusion models computationally
 efficient: the noisy image at any timestep \\(t\\) can be computed directly
