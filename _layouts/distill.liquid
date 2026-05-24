@@ -68,59 +68,72 @@
 
       <d-article>
   {% if page.toc and page.toc.size > 0 %}
+
     <d-contents>
-      <nav class="l-text figcaption toc-dropdown">
+
+      <!-- Added toc-wrapper class -->
+      <nav class="l-text figcaption toc-wrapper">
 
         <h3>Contents</h3>
 
         {% for section in page.toc %}
+
+          <!-- Section -->
           <div class="toc-section">
 
-            <!-- Main Section -->
-            <button class="toc-toggle">
+            <div class="toc-item">
 
-              <a href="#{{ section.name | slugify }}" class="toc-main-link">
+              <a href="#{{ section.name | slugify }}">
                 {{ section.name }}
               </a>
 
-              {% if section.subsections %}
-                <span class="toc-arrow">▸</span>
-              {% endif %}
-
-            </button>
+            </div>
 
             <!-- Subsections -->
             {% if section.subsections %}
+
               <ul class="toc-subsections">
 
                 {% for subsection in section.subsections %}
+
                   <li>
                     <a href="#{{ subsection.name | slugify }}">
                       {{ subsection.name }}
                     </a>
                   </li>
+
                 {% endfor %}
 
               </ul>
+
             {% endif %}
 
           </div>
+
         {% endfor %}
 
       </nav>
+
     </d-contents>
 
   {% elsif page.toc == true %}
+
     <d-contents>
-      <nav class="l-text figcaption">
+      <nav class="l-text figcaption toc-wrapper">
+
         <h3>Contents</h3>
+
         {% toc %}
+
       </nav>
     </d-contents>
+
   {% endif %}
 
   {{ content }}
+
 </d-article>
+
 
 
 <!-- ========================= -->
@@ -128,88 +141,79 @@
 <!-- ========================= -->
 
 <style>
-/* TOC Container */
-.toc-dropdown {
-  font-size: 0.95rem;
+
+/* ========================= */
+/* Sticky TOC */
+/* ========================= */
+
+d-contents {
+  position: sticky;
+  top: 80px;
+
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+
+  padding-right: 10px;
+
+  scrollbar-width: thin;
 }
 
-/* Each Section */
-.toc-section {
-  margin-bottom: 8px;
+/* Optional nicer scrollbar */
+
+d-contents::-webkit-scrollbar {
+  width: 6px;
 }
 
-/* Toggle Button */
+d-contents::-webkit-scrollbar-thumb {
+  background: rgba(120, 120, 120, 0.4);
+  border-radius: 10px;
+}
+
+/* ========================= */
+/* TOC dropdown arrow */
+/* ========================= */
+
 .toc-toggle {
-  width: 100%;
-  background: transparent;
-  border: none;
-  padding: 6px 0;
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
   cursor: pointer;
-  text-align: left;
+  margin-right: 6px;
+  font-size: 0.8rem;
+  user-select: none;
+  display: inline-block;
+  width: 12px;
 }
 
-/* Main Section Link */
-.toc-main-link {
-  text-decoration: none;
-  color: inherit;
+/* Section title */
+
+.has-submenu > a {
   font-weight: 600;
-  flex: 1;
 }
 
-/* Arrow */
-.toc-arrow {
-  font-size: 0.75rem;
-  transition: transform 0.25s ease;
-}
+/* Subsection spacing */
 
-/* Rotate arrow when active */
-.toc-section.active .toc-arrow {
-  transform: rotate(90deg);
-}
-
-/* Subsection List */
 .toc-subsections {
-  list-style: none;
-
-  margin: 0;
-  padding-left: 16px;
-
-  max-height: 0;
-  overflow: hidden;
-
-  transition:
-    max-height 0.3s ease,
-    margin-top 0.3s ease;
-}
-
-/* Open state */
-.toc-section.active .toc-subsections {
-  max-height: 500px;
-  margin-top: 6px;
-}
-
-/* Subsection items */
-.toc-subsections li {
-  margin: 5px 0;
+  margin-top: 4px;
+  margin-bottom: 8px;
+  padding-left: 18px;
 }
 
 /* Subsection links */
-.toc-subsections a {
-  text-decoration: none;
-  color: inherit;
-  opacity: 0.85;
-  font-size: 0.9rem;
+
+.toc-subsections li {
+  margin: 4px 0;
 }
 
-.toc-subsections a:hover {
-  opacity: 1;
+.toc-subsections a {
+  text-decoration: none;
 }
+
+/* Hover */
+
+.toc-wrapper a:hover {
+  opacity: 0.8;
+}
+
 </style>
+
 
 
 <!-- ========================= -->
@@ -217,28 +221,50 @@
 <!-- ========================= -->
 
 <script>
+
 document.addEventListener("DOMContentLoaded", function () {
 
+  // Find all sections
   const tocSections = document.querySelectorAll(".toc-section");
 
-  tocSections.forEach(section => {
+  tocSections.forEach((section) => {
 
-    const button = section.querySelector(".toc-toggle");
-    const subsections = section.querySelector(".toc-subsections");
+    // Find subsection list
+    const subList = section.querySelector(".toc-subsections");
 
-    // Only enable dropdown if subsections exist
-    if (subsections) {
+    // Only apply dropdown if subsection exists
+    if (subList) {
 
-      button.addEventListener("click", function (e) {
+      const tocItem = section.querySelector(".toc-item");
 
-        // Prevent clicking section link from toggling
-        if (e.target.tagName.toLowerCase() === "a") {
-          return;
-        }
+      // Add class
+      tocItem.classList.add("has-submenu");
 
-        e.preventDefault();
+      // Create dropdown arrow
+      const toggle = document.createElement("span");
 
-        section.classList.toggle("active");
+      toggle.classList.add("toc-toggle");
+
+      // Closed by default
+      toggle.innerHTML = "▸";
+
+      // Insert arrow before section link
+      tocItem.insertBefore(toggle, tocItem.firstChild);
+
+      // Hide subsection initially
+      subList.style.display = "none";
+
+      // Toggle open/close
+      toggle.addEventListener("click", function (e) {
+
+        e.stopPropagation();
+
+        const isOpen = subList.style.display === "block";
+
+        subList.style.display = isOpen ? "none" : "block";
+
+        toggle.innerHTML = isOpen ? "▸" : "▾";
+
       });
 
     }
@@ -246,6 +272,7 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
 });
+
 </script>
 
       <d-appendix>
