@@ -72,6 +72,7 @@
 
     <div class="distill-layout">
 
+      <!-- TOC -->
       <aside class="distill-toc">
         <nav class="toc-wrapper">
 
@@ -110,6 +111,7 @@
         </nav>
       </aside>
 
+      <!-- CONTENT -->
       <div class="distill-content">
         {{ content }}
       </div>
@@ -131,20 +133,47 @@
 
 <style>
 
-.distill-layout {
-  display: flex;
-  gap: 3rem;
-  align-items: flex-start;
+/* REMOVE CENTERED ARTICLE CONTAINER */
+
+d-article {
+  max-width: 100% !important;
+  width: 100% !important;
+
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+
+  padding-left: 2rem;
+  padding-right: 2rem;
 }
 
-/* LEFT TOC */
+/* MAIN LAYOUT */
+
+.distill-layout {
+
+  display: grid;
+
+  grid-template-columns:
+    260px
+    minmax(0, 850px)
+    1fr;
+
+  column-gap: 3rem;
+
+  align-items: start;
+
+  width: 100%;
+}
+
+/* TOC */
 
 .distill-toc {
-  width: 280px;
-  flex-shrink: 0;
+  width: 260px;
 }
 
+/* STICKY TOC */
+
 .toc-wrapper {
+
   position: sticky;
   top: 100px;
 
@@ -160,7 +189,7 @@
 /* CONTENT */
 
 .distill-content {
-  flex: 1;
+  width: 100%;
   min-width: 0;
 }
 
@@ -169,14 +198,16 @@
 .toc-wrapper h3 {
   margin-top: 0;
   margin-bottom: 1rem;
+
   font-size: 1rem;
   font-weight: 600;
 }
 
-/* LIST */
+/* LISTS */
 
 .toc-wrapper ul {
   list-style: none;
+
   padding-left: 1rem;
   margin-top: 0.3rem;
 }
@@ -192,9 +223,12 @@
 /* LINKS */
 
 .toc-wrapper a {
+
   text-decoration: none;
   color: inherit;
+
   font-size: 0.95rem;
+
   transition: color 0.2s ease;
 }
 
@@ -206,8 +240,11 @@
 
 .toc-toggle {
   cursor: pointer;
+
   margin-right: 6px;
+
   font-size: 0.8rem;
+
   user-select: none;
 }
 
@@ -230,6 +267,11 @@
 
 @media (max-width: 1000px) {
 
+  d-article {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
   .distill-layout {
     display: block;
   }
@@ -237,7 +279,6 @@
   .distill-toc {
     display: none;
   }
-
 }
 
 </style>
@@ -276,9 +317,7 @@ document.addEventListener("DOMContentLoaded", function () {
         toggle.innerHTML = isOpen ? "▸" : "▾";
 
       });
-
     }
-
   });
 
 });
