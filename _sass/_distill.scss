@@ -83,16 +83,10 @@ d-article {
     padding-left: 2em;
     padding-right: 3em;
     border-right: 1px solid var(--global-divider-color);
-    // width: calc(max(70%, 300px));
-    min-width: 220px;
-    max-width: 260px;
+    width: calc(max(70%, 300px));
     margin-right: 0px;
     margin-top: 0em;
     display: grid;
-
-    position: sticky;
-    top: 80px;
-    height: fit-content;
 
     grid-template-columns:
       minmax(8px, 1fr) [toc] auto
