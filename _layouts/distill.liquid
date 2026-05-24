@@ -98,11 +98,13 @@
         {% endif %}
 
         {{ content }}
-      </d-article>
 
-{% if page.citation %}
+        {% if page.citation %}
   {% include citation.liquid %}
 {% endif %}
+      </d-article>
+
+
 
       <d-appendix>
         <d-footnote-list></d-footnote-list>
