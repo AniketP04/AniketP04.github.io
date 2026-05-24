@@ -4,13 +4,36 @@ title: VAE-Inspired Diffusion Revolution
 date: 2026-05-23
 description: This blog explains how diffusion models overcome VAE blurriness by generating images through gradual denoising, while also showing the conceptual connection to VAE-style latent modeling. It compares the stability and generative strengths of diffusion models with traditional approaches and highlights why their stepwise reverse process is so powerful.
 thumbnail: assets/img/thumbnail_diffusion.png
-bibliography: 2026-05-23-VAE-Inspired Diffusion Revolution.bib
+bibliography: 2026-05-23-VAE-Inspired_Diffusion_Revolution.bib
 toc: true
 citation: true
 ---
 
+# Diffusion Models - Introduction
 
-# Why Diffusion Models?
+Diffusion models are based on principles from non-equilibrium
+thermodynamics. They employ a Markov chain process that gradually
+injects random noise into data and subsequently learn the reverse
+process to generate meaningful data samples from noisy inputs. In
+contrast to VAE and flow-based models, diffusion models follow a
+predefined training procedure, and their latent variables maintain the
+same high dimensionality as the original data.
+
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/diffusion_model.png"
+       style="width:100%; max-width:930px; height:auto;">
+</div>
+<i> Overview of the diffusion model framework. </i>
+</div>
+
+Diffusion Models are a class of generative models designed to produce
+data that resembles the data used during training. They operate by
+progressively corrupting training samples through the addition of
+Gaussian noise and then learning how to reconstruct the original data by
+reversing this noise injection process. Once trained, these models can
+generate new samples by transforming randomly generated noise through
+the learned denoising procedure.
 
 ## Why not just stick with GANs?
 
@@ -69,32 +92,6 @@ The one trade-off is speed: generating an image requires hundreds of
 forward passes through the network rather than one. This is an active
 research area, and models like DDIM and consistency models have already
 cut that gap significantly.
-
-# Diffusion Models - Introduction
-
-Diffusion models are based on principles from non-equilibrium
-thermodynamics. They employ a Markov chain process that gradually
-injects random noise into data and subsequently learn the reverse
-process to generate meaningful data samples from noisy inputs. In
-contrast to VAE and flow-based models, diffusion models follow a
-predefined training procedure, and their latent variables maintain the
-same high dimensionality as the original data.
-
-<div style="text-align:center">
-<div class="l-body">
-    <img src="/assets/img/diffusion_blog/diffusion_model.png"
-       style="width:100%; max-width:930px; height:auto;">
-</div>
-<i> Overview of the diffusion model framework. </i>
-</div>
-
-Diffusion Models are a class of generative models designed to produce
-data that resembles the data used during training. They operate by
-progressively corrupting training samples through the addition of
-Gaussian noise and then learning how to reconstruct the original data by
-reversing this noise injection process. Once trained, these models can
-generate new samples by transforming randomly generated noise through
-the learned denoising procedure.
 
 ## Forward Diffusion process
 
