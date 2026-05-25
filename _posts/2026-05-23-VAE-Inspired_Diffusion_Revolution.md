@@ -1035,7 +1035,23 @@ generation.
 
 # Conclusion
 
-Diffusion models offer a powerful alternative to GANs and VAEs by trading a single-step generator for a sequence of small, stable denoising steps. This gradual reverse process avoids adversarial collapse and the blurriness caused by one-shot latent reconstruction. By framing generation as iterative refinement, diffusion models can capture rich multimodal structure and produce sharp, realistic samples. The U-Net noise predictor is a key ingredient, enabling the model to adapt to different noise levels and restore both global layout and fine detail. Noise schedules like cosine help allocate learning where it matters most, while guidance and latent compression balance fidelity, control, and efficiency. In practice, diffusion models have become the dominant approach for high-quality image synthesis because they combine theoretical grounding with strong empirical performance. Future improvements will continue to narrow the speed gap while preserving their stability and expressiveness.
+Generative models can be broadly categorized into two main families based on how they learn and generate data distributions:
+
+- **Likelihood-Based Models** — These models explicitly estimate or optimize the probability distribution of the data. Representative approaches include:
+  - **Autoregressive Models**
+  - **Variational Autoencoders (VAEs)**
+  - **Normalizing Flows**
+  - **Energy-Based Models (EBMs)**
+  - **Diffusion Models**
+
+- **Likelihood-Free Models** — These models generate realistic samples without directly modeling data likelihood. The most prominent example is:
+  - **Generative Adversarial Networks (GANs)**
+
+Among these approaches, diffusion models have recently emerged as one of the most effective and reliable generative modeling frameworks. Diffusion models offer a powerful alternative to GANs and VAEs by replacing single-step generation with a sequence of small, stable denoising steps. This gradual reverse process mitigates issues such as adversarial instability in GANs and the blurry reconstructions often observed in VAEs. By formulating generation as iterative refinement, diffusion models are able to capture complex multimodal data distributions and synthesize sharp, high-quality samples.
+
+A central component of modern diffusion architectures is the U-Net–based noise predictor, which enables the model to handle varying noise levels while recovering both global structure and fine-grained details. Furthermore, carefully designed noise schedules, such as cosine schedules, improve learning efficiency by allocating modeling capacity to the most informative stages of the denoising process. Techniques including classifier guidance, classifier-free guidance, and latent-space diffusion further enhance controllability, fidelity, and computational efficiency.
+
+Overall, diffusion models have become the dominant paradigm for high-quality image synthesis due to their strong theoretical foundation, training stability, and impressive empirical performance. As research continues, future advancements are expected to significantly reduce sampling time while preserving the robustness, expressiveness, and realism that make diffusion models so successful.
 
 --- 
 
