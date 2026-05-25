@@ -473,7 +473,28 @@ $$
 
 This formulation produces stable optimization behavior because the
 network learns a well-scaled Gaussian regression task across all
-timesteps. For readers interested in the full mathematical derivation of the reverse process, there are several excellent resources available. In particular, [Lilan Wang](https://lilianweng.github.io/posts/2021-07-11-diffusion-models/#reverse-diffusion-process) provides a highly accessible explanation in her blog post, and Appendix A of the original 2020 [diffusion paper](https://arxiv.org/abs/2006.11239)  contains a detailed derivation of the underlying equations.
+timesteps. 
+
+The final objective function $$L_t$$ then looks as follows (for a random time step $$t$$ given $$\epsilon \sim \mathcal{N}(0,1)$$):
+
+$$
+\mathcal{L} =
+\left\|
+\epsilon -
+\epsilon_\theta(x_t, t)
+\right\|^2
+=
+\left\|
+\epsilon -
+\epsilon_\theta\left(
+\sqrt{\bar{\alpha}_t}\,x_0 +
+\sqrt{1-\bar{\alpha}_t}\,\epsilon,
+t
+\right)
+\right\|^2
+$$
+
+For readers interested in the full mathematical derivation of the reverse process, there are several excellent resources available. In particular, [Lilan Wang](https://lilianweng.github.io/posts/2021-07-11-diffusion-models/#reverse-diffusion-process) provides a highly accessible explanation in her blog post, and Appendix A of the original 2020 [diffusion paper](https://arxiv.org/abs/2006.11239)  contains a detailed derivation of the underlying equations.
 
 ## Variational Learning Objective
 
