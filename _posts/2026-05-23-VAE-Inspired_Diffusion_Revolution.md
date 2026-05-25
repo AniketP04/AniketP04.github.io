@@ -494,6 +494,9 @@ t
 \right\|^2
 $$
 
+Here, $$x_0$$ is the initial (real, uncorrupted) image, and we see the direct noise level $$t$$ sample given by the fixed forward process.
+$$\epsilon$$ is the pure noise sampled at time step $$t$$, and $$\epsilon_\theta(x_t,t)$$ is our neural network. The neural network is optimized using a simple mean squared error (MSE) between the true and the predicted Gaussian noise.
+
 For readers interested in the full mathematical derivation of the reverse process, there are several excellent resources available. In particular, [Lilan Wang](https://lilianweng.github.io/posts/2021-07-11-diffusion-models/#reverse-diffusion-process) provides a highly accessible explanation in her blog post, and Appendix A of the original 2020 [diffusion paper](https://arxiv.org/abs/2006.11239)  contains a detailed derivation of the underlying equations.
 
 ## Variational Learning Objective
