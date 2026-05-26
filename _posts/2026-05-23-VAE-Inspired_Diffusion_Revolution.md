@@ -1,10 +1,11 @@
 ---
-layout: distill
+layout: post
 title: VAE-Inspired Diffusion Revolution
 date: 2026-05-23
 description: This blog explains how diffusion models overcome VAE blurriness by generating images through gradual denoising, while also showing the conceptual connection to VAE-style latent modeling. It compares the stability and generative strengths of diffusion models with traditional approaches and highlights why their stepwise reverse process is so powerful.
 thumbnail: assets/img/thumbnail_diffusion.png
-toc: true
+toc:
+    beginning: true
 citation: true
 ---
 
@@ -356,7 +357,14 @@ direct deterministic generation.
 The goal of the reverse diffusion process is to invert the forward
 noising procedure. Starting from pure Gaussian noise,
 \\(x_T \sim \mathcal{N}(0, I)\\), the model progressively removes noise to
-reconstruct a clean sample \\(x_0\\).
+reconstruct a clean sample \\(x_0\\). Rather than generating the clean image directly, the network is trained to estimate the noise component present at each timestep. At a given diffusion step $$t$$, the model receives the noisy sample and timestep pair $$(x_t,t)$$, and predicts $$\epsilon_{\theta}(x_t,t)$$, where $$\epsilon_{\theta}$$ represents the neural network parameterized by $$\theta$$.
+
+> ##### Intuition
+>
+> Given this partially corrupted image at timestep t, what noise was added to it?
+{: .block-intuition }
+
+By accurately estimating the noise, the model can subtract it step by step, gradually transforming random noise into a coherent and realistic sample.
 
 <div style="text-align:center">
 <div class="l-body">
