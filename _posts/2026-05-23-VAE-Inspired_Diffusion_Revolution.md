@@ -364,7 +364,7 @@ reconstruct a clean sample \\(x_0\\). Rather than generating the clean image dir
 
 > ##### Intuition
 >
-> Given this partially corrupted image at timestep t, what noise was added to it?
+> Given this partially corrupted image at timestep $$t$$, what noise was added to it?
 {: .block-intuition }
 
 By accurately estimating the noise, the model can subtract it step by step, gradually transforming random noise into a coherent and realistic sample.
