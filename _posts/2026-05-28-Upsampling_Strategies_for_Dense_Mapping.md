@@ -122,10 +122,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-# Functional API
 upsampled = F.interpolate(features, scale_factor=2, mode='nearest')
 
-# Module API
 upsample_nn = nn.Upsample(scale_factor=2, mode='nearest')
 output = upsample_nn(features)  # features: (B, C, H, W)
 ```
@@ -270,7 +268,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
-# Functional API — align_corners behavior matters
+# align_corners behavior matters
 upsampled_default = F.interpolate(
     features, scale_factor=2, mode='bilinear', align_corners=False
 )
@@ -278,7 +276,7 @@ upsampled_aligned = F.interpolate(
     features, scale_factor=2, mode='bilinear', align_corners=True
 )
 
-# Standard decoder block: bilinear upsample + refining convolution
+# bilinear upsample + refining convolution
 class BilinearDecoder(nn.Module):
     def __init__(self, in_channels, out_channels, skip_channels=0):
         super().__init__()
@@ -386,19 +384,19 @@ With $$k = 4$$, $$s = 2$$, $$p = 1$$: $$H' = (H-1) \cdot 2 - 2 + 4 = 2H$$. This 
 import torch
 import torch.nn as nn
 
-# Basic transposed convolution upsampling
+# basic transposed convolution upsampling
 transposed_conv = nn.ConvTranspose2d(
     in_channels=256,
     out_channels=128,
-    kernel_size=4,     # CRITICAL: must be divisible by stride
+    kernel_size=4,  
     stride=2,
     padding=1
 )
 
 # With correct kernel size: k=4, s=2, p=1 → doubles resolution
-# output_size = (H-1)*2 - 2*1 + 4 = 2H ✓
+# output_size = (H-1)*2 - 2*1 + 4 = 2H
 
-# Anti-checkerboard pattern: k=4, s=2 (k divisible by s)
+# anti-checkerboard pattern: k=4, s=2 (k divisible by s)
 class DeconvDecoder(nn.Module):
     def __init__(self, in_channels, out_channels):
         super().__init__()
@@ -467,7 +465,7 @@ Beyond choosing $$k$$ divisible by $$s$$, several approaches have been developed
 **2. Sub-pixel Convolution**: Perform a standard convolution to produce $$C \times s^2$$ channels, then rearrange (pixel shuffle) to produce $$C$$ channels at $$s \times$$ resolution. Sub-pixel convolution has uniform overlap (no zero insertion) and is popular in super-resolution networks.
 
 ```python
-# Sub-pixel convolution (PixelShuffle)
+# sub-pixel convolution (PixelShuffle)
 class SubPixelUpsample(nn.Module):
     def __init__(self, in_channels, out_channels, scale_factor=2):
         super().__init__()
