@@ -36,6 +36,39 @@ This project focuses on monocular depth mapping from single RGB images using dee
 - **GPU Support**: CUDA-enabled training with multi-GPU support
 - **Checkpoint Management**: Model saving and loading capabilities
 
+## Research Focus
+
+This project explored decoder architecture design for monocular depth mapping, with emphasis on:
+
+- Bilinear upsampling vs transposed convolution
+- Artifact behavior in depth reconstruction
+- Skip-connection effectiveness
+- Real-time deployment tradeoffs
+- Memory/performance optimization
+
+<details>
+<summary><strong>Read Full Technical Analysis</strong></summary>
+
+<br>
+
+I wrote a detailed technical breakdown covering:
+
+<ul>
+  <li>Bilinear upsampling</li>
+  <li>Transposed convolution</li>
+  <li>Checkerboard artifacts</li>
+  <li>Decoder design tradeoffs</li>
+  <li>Modern depth estimation architectures</li>
+  <li>Monodepth2, DPT, MiDaS, and Depth Anything</li>
+</ul>
+
+
+➡️ <a href="https://aniketp04.github.io/blog/2026/Upsampling_Strategies_for_Dense_Mapping/"><strong>Read the full blog post</strong></a>
+
+</details>
+
+---
+
 ## Dependencies
 
 - PyTorch
