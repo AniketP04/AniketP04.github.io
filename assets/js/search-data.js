@@ -37,7 +37,18 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/cv/";
           },
-        },{id: "post-vae-inspired-diffusion-revolution",
+        },{id: "post-upsampling-strategies-for-dense-mapping",
+        
+          title: "Upsampling Strategies for Dense Mapping",
+        
+        description: "A deep technical comparison of nearest neighbor, bilinear interpolation, and transposed convolution for dense prediction networks.",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/Upsampling_Strategies_for_Dense_Mapping/";
+          
+        },
+      },{id: "post-vae-inspired-diffusion-revolution",
         
           title: "VAE-Inspired Diffusion Revolution",
         
