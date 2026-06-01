@@ -436,6 +436,24 @@ $$
 the posterior mean can be rewritten
 entirely in terms of \\(x_t\\), \\(x_0\\), and the diffusion coefficients.
 
+<details>
+<summary><strong>Reparameterization Trick</strong></summary>
+
+<ul>
+<li> Direct sampling is a stochastic (random) operation, e.g., \(z \sim \mathcal{N}(\mu,\sigma^2) \). Since the sampled value depends on randomness, the sampling step is non-differentiable, making it difficult to compute gradients and optimize the model using backpropagation.</li>
+
+<li> To make the model trainable, the reparameterization trick separates randomness from the learnable parameters. Instead of sampling \(z \) directly, we sample noise \( \epsilon \sim \mathcal{N}(0,1) \) and express the sample as \( z=\mu+\sigma\epsilon \).</li>
+
+<li> This makes the operation differentiable because the randomness is now fixed inside \( \epsilon \), while \( z \) becomes a deterministic mathematical function of \( \mu \) and \( \sigma \). Once \( \epsilon \) is sampled, the computation consists only of multiplication and addition, both of which are differentiable operations. </li>
+
+<li> As a result, gradients can be computed analytically: \( \frac{\partial z}{\partial \mu}=1, \quad \frac{\partial z}{\partial \sigma}=\epsilon \). Since these derivatives exist, gradients can flow through \( \mu \) and \( \sigma \), making the computation tractable and enabling backpropagation. </li>
+
+<li> In essence, the reparameterization trick preserves the stochastic nature of sampling while transforming it into a differentiable computation graph, allowing probabilistic models such as VAEs to be trained efficiently using standard gradient descent. </li>
+</ul>
+
+</details>
+<br>
+
 ## Learning the Reverse Process
 
 During generation, the clean image \\(x_0\\) is unknown, so diffusion models
