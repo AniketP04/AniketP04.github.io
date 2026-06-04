@@ -195,6 +195,14 @@ rapidly image structure is corrupted during the forward diffusion
 process. The choice of schedule plays a crucial role in the performance
 and quality of the diffusion model.
 
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/linear_plot.png"
+       style="width:60%; max-width:930px; height:auto;">
+</div>
+</div>
+<br> 
+
 A straightforward approach is the **linear schedule**, where the
 variance term \\(\beta_t\\) increases linearly from a very small value
 (e.g., \\(10^{-4}\\)) to a larger value (e.g., \\(0.02\\)). Although intuitive,
@@ -231,6 +239,14 @@ Here:
 
 -   \\(s\\) is a small offset (typically \\(0.008\\)) introduced to avoid
     excessively large values of \\(\beta_t\\) near \\(t=0\\).
+
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/cosine_plot.png"
+       style="width:60%; max-width:930px; height:auto;">
+</div>
+</div>
+<br> 
 
 The cosine formulation causes \\(\bar{\alpha}_t\\) to decrease gradually
 from $$\mathcal{1}$$ toward $$\mathcal{0}$$ along a smooth cosine curve. Unlike the linear schedule,
@@ -482,6 +498,41 @@ Rather than directly predicting the reverse mean, most implementations
 train the model to predict the added noise \\(\epsilon\\). This is known as
 the \\(\epsilon\\)-prediction formulation.
 
+There are three common ways to parameterize what the network predicts:
+
+**$$\epsilon$$ -prediction** (original DDPM): predict the noise that was added. The denoising update rule then uses this to compute $$x_{t-1}$$
+
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/e_pred.png"
+       style="width:100%; max-width:930px; height:auto;">
+</div>
+</div>
+<br>
+​
+**$$x_0$$ -prediction:** predict the clean image directly. The posterior mean formula then combines this with $$x_t$$
+  to find $$x_{t-1}$$
+
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/x_pred.png"
+       style="width:100%; max-width:930px; height:auto;">
+</div>
+</div>
+<br>
+
+**v-prediction** (from progressive distillation): predict a velocity $$v=\sqrt{\bar{\alpha}_t}\epsilon - \sqrt{1-\bar{\alpha}_t}x_0$$, which is numerically more stable at both very low and very high noise levels.
+
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/v_pred.png"
+       style="width:100%; max-width:930px; height:auto;">
+</div>
+</div>
+<br>
+
+All three parameterizations are mathematically equivalent but have different numerical properties during training.
+
 The reverse mean can then be expressed as:
 
 $$
@@ -678,6 +729,20 @@ step gradually restores image structure:
 -   intermediate steps form semantic shapes,
 
 -   later steps restore fine textures and details.
+
+<div style="text-align:center">
+<div class="l-body">
+    <img src="/assets/img/diffusion_blog/speed.png"
+       style="width:100%; max-width:930px; height:auto;">
+</div>
+</div>
+<br>
+
+The major drawback is speed: **DDPM** requires all $$T=1000$$ sequential denoising steps. This makes generation roughly $$1000$$ times slower than a GAN or VAE, which produce samples in a single forward pass. Two key follow-up works addressed this:
+
+**DDIM** showed that the reverse process can be reformulated as solving an ordinary differential equation (ODE). This allows deterministic sampling and — crucially — enables skipping timesteps. With only 50 steps, DDIM achieves quality comparable to 1000-step DDPM.
+
+**DPM-Solver** applies higher-order numerical ODE solvers (analogous to Runge-Kutta methods) to the diffusion ODE. By using second and third-order solvers, it achieves high-quality samples in as few as 10–20 steps — a 50–100x speedup over the original DDPM.
 
 ## Why the Reverse Process Works
 
@@ -1098,3 +1163,7 @@ Overall, diffusion models have become the dominant paradigm for high-quality ima
 7. Ronneberger, O., Fischer, P., & Brox, T. (2015). *U-Net: Convolutional Networks for Biomedical Image Segmentation*. arXiv:1505.04597.
 
 8. Erdem, K. (2023). *Step by Step Visual Introduction to Diffusion Models*. Retrieved from https://erdem.pl/2023/11/step-by-step-visual-introduction-to-diffusion-models
+   
+9. Ho, Jonathan, Ajay Jain, and Pieter Abbeel. "Denoising diffusion probabilistic models." Advances in neural information processing systems 33 (2020): 6840-6851.
+    
+10. Lu, Cheng, et al. "Dpm-solver: A fast ode solver for diffusion probabilistic model sampling in around 10 steps." Advances in neural information processing systems 35 (2022): 5775-5787.
