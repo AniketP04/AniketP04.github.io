@@ -29,7 +29,7 @@ I'm **Aniket Patil**, an AI & Data Science engineer passionate about making mach
 
 **🔭 Currently Exploring**
 
-Deeply focused on Computer Vision — and currently venturing 🎯 into 3D Computer Vision 🧊. Fascinated by how spatial understanding can unlock entirely new dimensions of perception for AI systems
+Deeply focused on Computer Vision — and currently venturing 🎯 into 3D Vision 🧊. Fascinated by how spatial understanding can unlock entirely new dimensions of perception for AI systems
 
 **🏛️ Research Journey**
 
