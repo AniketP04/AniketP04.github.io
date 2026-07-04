@@ -90,8 +90,9 @@ flowchart TD
     style DEPLOY fill:#2a2a4a,color:#fff
 ```
 
-### PatchCore — Offline and Online Phases
-
+<details>
+<summary><strong>PatchCore — Offline and Online Phases</strong></summary>
+  
 ```mermaid
 flowchart TD
     subgraph OFFLINE["OFFLINE PHASE — Build Memory Bank (run once)"]
@@ -131,8 +132,12 @@ flowchart TD
     style ONLINE fill:#0d1117,color:#3fb950,stroke:#30363d
 ```
 
-### WinCLIP — Prototype Construction and Inference
+</details>
 
+
+<details>
+<summary><strong>WinCLIP — Prototype Construction and Inference</strong></summary>
+  
 ```mermaid
 flowchart TD
     subgraph PROTO["TEXT PROTOTYPE CONSTRUCTION (run once at init)"]
@@ -175,6 +180,134 @@ flowchart TD
     style INFERENCE fill:#0d1117,color:#d2a8ff,stroke:#30363d
 ```
 
+</details>
+
+
+<details>
+<summary><strong>Fusion Pipeline</strong></summary>
+  
+```mermaid
+flowchart LR
+    PC_SCORE["PatchCore Score\nraw L2 distance\nrange: ~[0, 10+]"]
+    WC_SCORE["WinCLIP Score\nsoftmax P(anomaly)\nrange: ~[0, 1]"]
+    PC_MAP["PatchCore Map\n[224, 224]\nL2 distance values"]
+    WC_MAP["WinCLIP Map\n[224, 224]\nsoftmax probabilities"]
+
+    PC_SCORE --> NORM_S["Score Min-Max Norm\npc_norm = (s - min) / (max - min)\nStats from training set\nSaved in fusion_config.json"]
+    WC_SCORE --> NORM_S
+
+    PC_MAP --> NORM_M["Map Min-Max Norm\nGlobal min-max across N images\npc_map_norm ∈ [0, 1]"]
+    WC_MAP --> NORM_M
+
+    NORM_S --> GRID["Alpha Grid Search\nα ∈ {0.0, 0.1, ..., 1.0}\nMaximize Image AUROC\nSelect best_alpha"]
+    GRID --> FUSE_S["Score Fusion\nfused = α × pc_norm\n+ (1−α) × wc_norm"]
+    NORM_M --> FUSE_M["Map Fusion\nfused_map = α × pc_map_norm\n+ (1−α) × wc_map_norm\n[224, 224]"]
+
+    FUSE_S --> CALIB["Threshold Calibration\nNormal images only\n95th percentile of scores\n= threshold at FPR 5%\nSaved in fusion_config.json"]
+    CALIB --> DECISION["Decision\nfused_score > threshold\n→ FAIL\nfused_score ≤ threshold\n→ PASS"]
+
+    FUSE_M --> VIZ2["Visualization\nHeatmap + Overlay\nSide-by-side Panel"]
+    DECISION --> VIZ2
+
+    style GRID fill:#4a3a00,color:#fff
+    style CALIB fill:#003a4a,color:#fff
+    style DECISION fill:#2a0000,color:#fff
+```
+
+</details>
+
+
+<details>
+<summary><strong>ONNX Deployment Pipeline</strong></summary>
+  
+```mermaid
+flowchart TD
+    subgraph EXPORT["EXPORT PHASE"]
+        PT_DINO["PyTorch DINOv2\nDINOv2ExportWrapper\n(subclass approach, no hooks)\nforward() iterates blocks\ncaptures intermediate outputs\ndirectly in computation graph"]
+        PT_CLIP["PyTorch CLIP\nCLIPExportWrapper\nNormalization baked in\nAccepts raw [0,1] RGB\nOutputs L2-normalized [B, 640]"]
+        PT_DINO --> ONNX_D["dinov2_vits14.onnx\nInput: [B, 3, 224, 224]\nOutput: [B, 256, 768]\nopset 17\ndo_constant_folding=True"]
+        PT_CLIP --> ONNX_C["clip_vitb16plus240.onnx\nInput: [B, 3, 240, 240] raw\nOutput: [B, 640] L2-normed\nopset 17"]
+        ONNX_D --> VALID["Validation\nmax_diff < 5e-5\nPyTorch vs ONNX output"]
+        ONNX_C --> VALID
+    end
+
+    subgraph RUNTIME["RUNTIME PHASE"]
+        LOAD["Load at Startup\nort.InferenceSession\nCUDAExecutionProvider\nor CPUExecutionProvider\nFAISS index (CPU)\nPrototype banks (GPU tensor)\nfusion_config.json"]
+        LOAD --> INF_D["DINOv2 ONNX Forward\n[1, 3, 224, 224] → [1, 256, 768]\n~15ms GPU / ~80ms CPU"]
+        LOAD --> INF_C["CLIP ONNX Forward\n[B, 3, 240, 240] → [B, 640]\n~5ms/batch GPU / ~25ms/batch CPU"]
+        INF_D --> KNN2["FAISS CPU Search\n[256, 768] vs 5350 coreset\n~5ms"]
+        INF_C --> SIM["Cosine Similarity\nTop-k aggregation\nWindow score accumulation"]
+        KNN2 --> FUSE2["Fusion + Decision\n~2ms"]
+        SIM --> FUSE2
+        FUSE2 --> OUT["Result Dictionary\npc_map: [224,224]\nwc_map: [224,224]\nfused_map: [224,224]\nfused_score: float\ndecision: PASS/FAIL\nlatency breakdown"]
+    end
+
+    EXPORT --> RUNTIME
+    style EXPORT fill:#0d1117,color:#79c0ff,stroke:#30363d
+    style RUNTIME fill:#0d1117,color:#56d364,stroke:#30363d
+```
+
+</details>
+
+
+<details>
+<summary><strong>Evaluation Workflow</strong></summary>
+  
+```mermaid
+flowchart TD
+    A["Test Dataset\nMVTec AD Bottle\n83 images total\n22 normal + 61 anomaly"] --> B["DataLoader\nbatch_size=1\nshuffle=False"]
+    B --> C["Model Forward\nPatchCore + WinCLIP\nper image"]
+    C --> D["Accumulate Results\nanomalys_maps: List[H,W]\nimage_scores: List[float]\ngt_labels: List[int]\ngt_masks: List[H,W]"]
+    D --> E["Stack Arrays\nanomalys_maps: [N,224,224]\nimage_scores: [N]\ngt_labels: [N]\ngt_masks: [N,224,224]"]
+    E --> SAVE["Save to disk\narrays/anomaly_maps.npy\narrays/image_scores.npy\narrays/gt_labels.npy\narrays/gt_masks.npy"]
+    E --> METRICS["Compute Metrics"]
+
+    METRICS --> IM_AUC["Image AUROC\nroc_auc_score(gt_labels, scores)"]
+    METRICS --> PIX_AUC["Pixel AUROC\nroc_auc_score(gt_masks.flat, maps.flat)"]
+    METRICS --> F1["Image F1-Max\nOptimal threshold from\nPrecision-Recall curve"]
+
+    IM_AUC --> JSON["metrics/metrics.json"]
+    PIX_AUC --> JSON
+    F1 --> JSON
+```
+
+</details>
+
+
+<details>
+<summary><strong>State Machine: PASS/FAIL Decision</strong></summary>
+  
+```mermaid
+stateDiagram-v2
+    [*] --> Idle: System Ready
+
+    Idle --> Preprocessing: Image received
+
+    Preprocessing --> PatchCoreInference: ImageNet normalized [1,3,224,224]
+    Preprocessing --> WinCLIPInference: CLIP normalized [1,3,240,240]
+
+    PatchCoreInference --> PCScored: pc_map [224,224] + pc_score
+    WinCLIPInference --> WCScored: wc_map [224,224] + wc_score
+
+    PCScored --> Normalizing: Both branches complete
+    WCScored --> Normalizing
+
+    Normalizing --> Fusing: pc_norm, wc_norm ∈ [0,1]
+    Fusing --> Thresholding: fused_score ∈ [0,1]
+
+    Thresholding --> PASS_State: fused_score ≤ threshold
+    Thresholding --> FAIL_State: fused_score > threshold
+
+    PASS_State --> Visualizing: ✅ OK
+    FAIL_State --> Visualizing: ❌ NG
+
+    Visualizing --> Saving: Heatmap + report generated
+    Saving --> Idle: Result returned to caller
+```
+
+</details>
+
+
 ---
 
 ## Demo
@@ -212,6 +345,79 @@ All experiments were run on the MVTec Anomaly Detection benchmark. Four categori
 | Grid | **1.0000** | 0.9739 | 0.8521 | 0.7337 | **1.0000** | 0.9651 |
 | Leather | **1.0000** | 0.9659 | 0.8169 | 0.9280 | **1.0000** | **0.9768** |
 | **Average** | **0.9311** | **0.9446** | **0.8102** | **0.7841** | **0.9545** | **0.9590** |
+
+<details>
+<summary><strong>Click to expand: Detailed Results</strong></summary>
+  
+```
+============================================================
+FUSION RESULTS — transistor
+============================================================
+Model                 Image AUROC  Pixel AUROC
+-------------------- ------------ ------------
+PatchCore                0.967083     0.968450
+WinCLIP                  0.854167     0.606035
+Fused                    0.979167     0.953839
+--------------------------------------------
+  Best alpha      : 0.80
+  Threshold       : 0.195098
+  Accuracy        : 0.9400
+  Gain vs PC      : +0.012083
+  Gain vs WinCLIP : +0.125000
+============================================================
+
+
+============================================================
+FUSION RESULTS — screw
+============================================================
+Model                 Image AUROC  Pixel AUROC
+-------------------- ------------ ------------
+PatchCore                0.757122     0.869940
+WinCLIP                  0.717360     0.868738
+Fused                    0.838696     0.940203
+--------------------------------------------
+  Best alpha      : 0.70
+  Threshold       : 0.312877
+  Accuracy        : 0.6687
+  Gain vs PC      : +0.081574
+  Gain vs WinCLIP : +0.121336
+============================================================
+
+
+============================================================
+FUSION RESULTS — grid
+============================================================
+Model                 Image AUROC  Pixel AUROC
+-------------------- ------------ ------------
+PatchCore                1.000000     0.973927
+WinCLIP                  0.852130     0.733723
+Fused                    1.000000     0.965109
+--------------------------------------------
+  Best alpha      : 0.60
+  Threshold       : 0.086652
+  Accuracy        : 0.9872
+  Gain vs PC      : +0.000000
+  Gain vs WinCLIP : +0.147870
+============================================================
+
+
+============================================================
+FUSION RESULTS — leather
+============================================================
+Model                 Image AUROC  Pixel AUROC
+-------------------- ------------ ------------
+PatchCore                1.000000     0.965851
+WinCLIP                  0.816916     0.928011
+Fused                    1.000000     0.976774
+--------------------------------------------
+  Best alpha      : 0.80
+  Threshold       : 0.122663
+  Accuracy        : 0.9839
+  Gain vs PC      : +0.000000
+  Gain vs WinCLIP : +0.183084
+============================================================
+```
+</details>
 
 Fusion improves image AUROC by +2.3% and pixel AUROC by +1.4% on average over PatchCore alone. The gain is consistent across all four categories.
 
