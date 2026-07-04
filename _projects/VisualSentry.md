@@ -90,8 +90,7 @@ flowchart TD
     style DEPLOY fill:#2a2a4a,color:#fff
 ```
 
-<details>
-<summary><strong>PatchCore — Offline and Online Phases</strong></summary>
+## PatchCore — Offline and Online Phases
   
 ```mermaid
 flowchart TD
@@ -132,11 +131,7 @@ flowchart TD
     style ONLINE fill:#0d1117,color:#3fb950,stroke:#30363d
 ```
 
-</details>
-
-
-<details>
-<summary><strong>WinCLIP — Prototype Construction and Inference</strong></summary>
+## WinCLIP — Prototype Construction and Inference
   
 ```mermaid
 flowchart TD
@@ -180,11 +175,7 @@ flowchart TD
     style INFERENCE fill:#0d1117,color:#d2a8ff,stroke:#30363d
 ```
 
-</details>
-
-
-<details>
-<summary><strong>Fusion Pipeline</strong></summary>
+## Fusion Pipeline
   
 ```mermaid
 flowchart LR
@@ -214,11 +205,7 @@ flowchart LR
     style DECISION fill:#2a0000,color:#fff
 ```
 
-</details>
-
-
-<details>
-<summary><strong>ONNX Deployment Pipeline</strong></summary>
+## ONNX Deployment Pipeline
   
 ```mermaid
 flowchart TD
@@ -247,11 +234,7 @@ flowchart TD
     style RUNTIME fill:#0d1117,color:#56d364,stroke:#30363d
 ```
 
-</details>
-
-
-<details>
-<summary><strong>Evaluation Workflow</strong></summary>
+## Evaluation Workflow
   
 ```mermaid
 flowchart TD
@@ -271,11 +254,7 @@ flowchart TD
     F1 --> JSON
 ```
 
-</details>
-
-
-<details>
-<summary><strong>State Machine: PASS/FAIL Decision</strong></summary>
+## State Machine: PASS/FAIL Decision
   
 ```mermaid
 stateDiagram-v2
@@ -304,9 +283,6 @@ stateDiagram-v2
     Visualizing --> Saving: Heatmap + report generated
     Saving --> Idle: Result returned to caller
 ```
-
-</details>
-
 
 ---
 
