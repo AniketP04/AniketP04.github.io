@@ -6,6 +6,7 @@ img: assets/img/visual_sentry/banner.png
 importance:
 related_publications: false
 github:
+mermaid: true
 ---
 
 # VisualSentry — Industrial Anomaly Detection System
