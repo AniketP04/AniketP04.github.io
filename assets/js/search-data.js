@@ -82,6 +82,11 @@ ninja.data = [{
           description: "Real-time monocular depth mapping using lightweight U-Net architecture.",
           section: "Projects",handler: () => {
               window.location.href = "/projects/Realtime%20Monocular%20Depth%20Mapping/";
+            },},{id: "projects-visualsentry",
+          title: 'VisualSentry',
+          description: "Zero-shot industrial anomaly detection system that learns exclusively from defect-free images and localizes unseen defects at inference time — no defect labels required. Fuses DINOv2-powered PatchCore memory retrieval with CLIP-based WinCLIP semantic scoring, achieving 0.9545 average image AUROC across four MVTec AD categories with sub-50ms ONNX inference.",
+          section: "Projects",handler: () => {
+              window.location.href = "/projects/VisualSentry/";
             },},{id: "teachings-data-science-fundamentals",
           title: 'Data Science Fundamentals',
           description: "This course covers the foundational aspects of data science, including data collection, cleaning, analysis, and visualization. Students will learn practical skills for working with real-world datasets.",
