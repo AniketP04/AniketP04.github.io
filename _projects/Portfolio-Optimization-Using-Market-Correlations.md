@@ -9,10 +9,6 @@ github: https://github.com/AniketP04/Portfolio-Optimization-Using-Market-Correla
 
 This research project provides a meticulous assessment of the forecasting prowess of three renowned time series models using ARIMA, LSTM, and Prophet applied to stock prices of major companies (Apple, Microsoft, NVIDIA) from prominent indices such as NYSE, NASDAQ, and S&P 500.
 
-<a href="https://github.com/username/project-name" target="_blank">
- <i class="fa-brands fa-github fa-lg" style="color: rgb(116, 192, 252);"></i>
-</a>
-
 ## Optimizing Investment Portfolios using Time Series Forecasting
 
 <div class="row">
