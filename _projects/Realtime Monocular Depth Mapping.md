@@ -170,36 +170,12 @@ $$
 | **FPS** | 6.1 | 35.5 |
 | **# Parameters** | 1.22M | 17.26M |
 
-<table style="border-collapse: collapse; width: 100%; text-align: center;">
-    <thead>
-        <tr>
-            <th>Input</th>
-            <th>Ground Truth</th>
-            <th>Baseline</th>
-            <th>Method</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><img src="/assets/img/depth_map_proj/input1.jpeg" alt="Input 1" style="max-width: 100%; height: auto;"></td>
-            <td><img src="/assets/img/depth_map_proj/gt1.jpeg" alt="Ground Truth 1" style="max-width: 100%; height: auto;"></td>
-            <td><img src="/assets/img/depth_map_proj/baseline1.jpeg" alt="Baseline 1" style="max-width: 100%; height: auto;"></td>
-            <td><img src="/assets/img/depth_map_proj/method1.jpeg" alt="Method 1" style="max-width: 100%; height: auto;"></td>
-        </tr>
-        <tr>
-            <td><img src="/assets/img/depth_map_proj/input2.jpeg" alt="Input 2" style="max-width: 100%; height: auto;"></td>
-            <td><img src="/assets/img/depth_map_proj/gt2.jpeg" alt="Ground Truth 2" style="max-width: 100%; height: auto;"></td>
-            <td><img src="/assets/img/depth_map_proj/baseline2.jpeg" alt="Baseline 2" style="max-width: 100%; height: auto;"></td>
-            <td><img src="/assets/img/depth_map_proj/method2.jpeg" alt="Method 2" style="max-width: 100%; height: auto;"></td>
-        </tr>
-        <tr>
-            <td><img src="/assets/img/depth_map_proj/input3.jpeg" alt="Input 3" style="max-width: 100%; height: auto;"></td>
-            <td><img src="/assets/img/depth_map_proj/gt3.jpeg" alt="Ground Truth 3" style="max-width: 100%; height: auto;"></td>
-            <td><img src="/assets/img/depth_map_proj/baseline3.jpeg" alt="Baseline 3" style="max-width: 100%; height: auto;"></td>
-            <td><img src="/assets/img/depth_map_proj/method3.jpeg" alt="Method 3" style="max-width: 100%; height: auto;"></td>
-        </tr>
-    </tbody>
-</table>
+
+| Input | Ground Truth | Baseline | Method |
+|------|------|------|------|
+| ![input1](/assets/img/depth_map_proj/input1.jpeg) | ![gt1](/assets/img/depth_map_proj/gt1.jpeg) | ![baseline1](/assets/img/depth_map_proj/baseline1.jpeg) | ![method1](/assets/img/depth_map_proj/method1.jpeg) |
+| ![input2](/assets/img/depth_map_proj/input2.jpeg) | ![gt2](/assets/img/depth_map_proj/gt2.jpeg) | ![baseline2](/assets/img/depth_map_proj/baseline2.jpeg) | ![method2](/assets/img/depth_map_proj/method2.jpeg) |
+| ![input3](/assets/img/depth_map_proj/input3.jpeg) | ![gt3](/assets/img/depth_map_proj/gt3.jpeg) | ![baseline3](/assets/img/depth_map_proj/baseline3.jpeg) | ![method3](/assets/img/depth_map_proj/method3.jpeg) |
 
 **Summary:**
 - Lower MSE and higher SSIM than the baseline, despite a much shallower network
