@@ -189,9 +189,20 @@ $$
 - Improve handling of transparent and reflective materials
 - Integrate the network into a full video depth mapping pipeline to evaluate real-world inference speed in practice
 
-## Key Learnings
+## References
 
-- Combining multiple complementary loss functions (pixel-wise, structural, and depth gradient) can improve depth map quality across both smooth and edge regions compared to using a single loss.
-- Bilinear upsampling can outperform transpose convolution for tasks where continuous surfaces dominate the target output, avoiding checkerboard artifacts.
-- A significantly smaller and shallower network can match or exceed a larger baseline's accuracy while dramatically improving inference speed, provided the architecture and loss design are well suited to the task.
-- Real-world failure cases (cluttered scenes, transparent/reflective materials) highlight persistent limitations of CNN-based single image depth mapping.
+| Paper | Venue | Year |
+|---|---|---|
+| [Depth and Surface Normal Estimation From Monocular Images Using Regression on Deep Features and Hierarchical CRFs](https://openaccess.thecvf.com/content_cvpr_2015/html/Li_Depth_and_Surface_2015_CVPR_paper.html) | CVPR | 2015 |
+| [A simple monocular depth estimation network for balancing complexity and accuracy](https://www.nature.com/articles/s41598-025-97568-1) | Nature | 2025 |
+| [NYU Depth Dataset V2](https://cs.nyu.edu/~fergus/datasets/nyu_depth_v2.html) | ECCV | 2012 |
+
+---
+
+## Contact
+
+**Aniket Patil**
+
+[GitHub @AniketP04](https://github.com/AniketP04) · [LinkedIn](https://www.linkedin.com/in/ani-ket-patil) · aniketkolte0406@gmail.com
+
+Open a [GitHub Issue](https://github.com/AniketP04/Realtime-Monocular-Depth-Mapping/issues) for bugs, questions, or feature requests.
