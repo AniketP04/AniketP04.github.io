@@ -2,7 +2,7 @@
 layout: page
 title: Production RAG System with Hybrid Search & Evaluation Framework
 description: Production-ready RAG system using FAISS, BM25, Docker, and evaluation metrics.
-img: assets/img/rag_eval_proj.gif
+img: assets/img/rag_pipeline_proj/rag_eval_proj.gif
 importance: 1
 related_publications: false
 github: https://github.com/AniketP04/RAG-Pipeline-with-Evaluation
@@ -16,7 +16,7 @@ Enterprise-grade Retrieval-Augmented Generation (RAG) system combining semantic 
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/rag_eval.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/rag_pipeline_proj/rag_eval.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
@@ -30,7 +30,7 @@ This project implements a production-ready RAG pipeline using:
 
 <div class="row">
     <div class="col-sm mt-3 mt-md-0">
-        {% include figure.liquid loading="eager" path="assets/img/arxiv.png" title="example image" class="img-fluid rounded z-depth-1" %}
+        {% include figure.liquid loading="eager" path="assets/img/rag_pipeline_proj/arxiv.png" title="example image" class="img-fluid rounded z-depth-1" %}
     </div>
 </div>
 
