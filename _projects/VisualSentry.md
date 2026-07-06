@@ -26,8 +26,47 @@ VisualSentry is a production-grade industrial visual anomaly detection system th
 The system fuses two complementary detection paradigms:
 
 **PatchCore** extracts patch-level features from a DINOv2 backbone, builds a compressed coreset memory bank using FAISS, and scores each test image by finding the nearest neighbor distance from its patch embeddings to the stored normal distribution. This gives precise spatial localization of where defects occur.
+<details>
+<summary><strong>Hyperparameters</strong></summary>
+
+<br>
+
+| Hyperparameter | Value |
+|----------------|-------|
+| Image Size | `224` |
+| Patch Size | `14` |
+| Forward Hooks | `[8, 11]` |
+| Metric (coreset selection) | `Euclidean` |
+| Sampling Ratio | `10%` | 
+| Projection | `True` |
+| n_componenets | `auto` |
+| k (no. of neighbors) | `3` |
+| FAISS Index | `IndexFlatL2` |
+| FAISS Distance | `L2` |
+| Batch Size | `16` |
+| Random Seed | 42 |
+
+</details>
+<br>
 
 **WinCLIP** scores images using CLIP ViT-B-16-plus-240 by comparing sliding window crops against text prototype banks describing normal and anomalous product states. This provides a semantic, language-grounded signal about whether something looks wrong — without ever seeing a defect image.
+<details>
+<summary><strong>Hyperparameters</strong></summary>
+
+<br>
+
+| Hyperparameter | Value | Effect |
+|----------------|-------|--------|
+| Image Size | `240` | |
+| Patch Size | `16` | |
+| Window Scales | `[1, 2, 3, 4]` | sliding window sizes used to extract multi-scale local features. |
+| Aggregation | `topk` | How similarities across prototype bank are aggregated. |
+| topk | `5` | # of prototypes --> mean |
+| Temperature | `7.0/logit_scale` | how "confident" the probs are |s
+| Random Seed | `42` | |
+
+</details>
+<br>
 
 Both systems produce an anomaly heatmap and a scalar score. These are normalized and fused with an alpha-weighted combination (α = 0.8 in favor of PatchCore), producing a final calibrated Pass/Fail decision at sub-50ms GPU inference via ONNX Runtime.
 
