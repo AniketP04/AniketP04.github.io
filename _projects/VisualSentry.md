@@ -31,20 +31,64 @@ The system fuses two complementary detection paradigms:
 
 <br>
 
-| Hyperparameter | Value |
-|----------------|-------|
-| Image Size | `224` |
-| Patch Size | `14` |
-| Forward Hooks | `[8, 11]` |
-| Metric (coreset selection) | `Euclidean` |
-| Sampling Ratio | `10%` | 
-| Projection | `True` |
-| n_componenets | `auto` |
-| k (no. of neighbors) | `3` |
-| FAISS Index | `IndexFlatL2` |
-| FAISS Distance | `L2` |
-| Batch Size | `16` |
-| Random Seed | 42 |
+<table border="1" cellspacing="0" cellpadding="8">
+    <thead>
+        <tr>
+            <th>Hyperparameter</th>
+            <th>Value</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Image Size</td>
+            <td><code>224</code></td>
+        </tr>
+        <tr>
+            <td>Patch Size</td>
+            <td><code>14</code></td>
+        </tr>
+        <tr>
+            <td>Forward Hooks</td>
+            <td><code>[8, 11]</code></td>
+        </tr>
+        <tr>
+            <td>Metric (Coreset Selection)</td>
+            <td><code>Euclidean</code></td>
+        </tr>
+        <tr>
+            <td>Sampling Ratio</td>
+            <td><code>10%</code></td>
+        </tr>
+        <tr>
+            <td>Projection</td>
+            <td><code>True</code></td>
+        </tr>
+        <tr>
+            <td>n_components</td>
+            <td><code>auto</code></td>
+        </tr>
+        <tr>
+            <td>k (No. of Neighbors)</td>
+            <td><code>3</code></td>
+        </tr>
+        <tr>
+            <td>FAISS Index</td>
+            <td><code>IndexFlatL2</code></td>
+        </tr>
+        <tr>
+            <td>FAISS Distance</td>
+            <td><code>L2</code></td>
+        </tr>
+        <tr>
+            <td>Batch Size</td>
+            <td><code>16</code></td>
+        </tr>
+        <tr>
+            <td>Random Seed</td>
+            <td><code>42</code></td>
+        </tr>
+    </tbody>
+</table>
 
 </details>
 <br>
@@ -55,15 +99,52 @@ The system fuses two complementary detection paradigms:
 
 <br>
 
-| Hyperparameter | Value | Effect |
-|----------------|-------|--------|
-| Image Size | `240` | |
-| Patch Size | `16` | |
-| Window Scales | `[1, 2, 3, 4]` | sliding window sizes used to extract multi-scale local features. |
-| Aggregation | `topk` | How similarities across prototype bank are aggregated. |
-| topk | `5` | # of prototypes --> mean |
-| Temperature | `7.0/logit_scale` | how "confident" the probs are |s
-| Random Seed | `42` | |
+<table border="1" cellspacing="0" cellpadding="8">
+    <thead>
+        <tr>
+            <th>Hyperparameter</th>
+            <th>Value</th>
+            <th>Effect</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>Image Size</td>
+            <td><code>240</code></td>
+            <td>Input image resolution used by the CLIP encoder.</td>
+        </tr>
+        <tr>
+            <td>Patch Size</td>
+            <td><code>16</code></td>
+            <td>Defines the size of each Vision Transformer patch and determines the patch grid.</td>
+        </tr>
+        <tr>
+            <td>Window Scales</td>
+            <td><code>[1, 2, 3, 4]</code></td>
+            <td>Sliding window sizes (in patch units) used to extract multi-scale local features.</td>
+        </tr>
+        <tr>
+            <td>Aggregation</td>
+            <td><code>topk</code></td>
+            <td>Aggregates similarities across the prototype bank using the mean of the top-k similarities.</td>
+        </tr>
+        <tr>
+            <td>Top-k</td>
+            <td><code>5</code></td>
+            <td>Number of most similar prototypes whose similarity scores are averaged.</td>
+        </tr>
+        <tr>
+            <td>Temperature</td>
+            <td><code>7.0 / logit_scale</code></td>
+            <td>Controls the sharpness (confidence) of the softmax probability distribution.</td>
+        </tr>
+        <tr>
+            <td>Random Seed</td>
+            <td><code>42</code></td>
+            <td>Ensures reproducible experiments by fixing random number generation.</td>
+        </tr>
+    </tbody>
+</table>
 
 </details>
 <br>
