@@ -26,6 +26,71 @@ VisualSentry is a production-grade industrial visual anomaly detection system th
 The system fuses two complementary detection paradigms:
 
 **PatchCore** extracts patch-level features from a DINOv2 backbone, builds a compressed coreset memory bank using FAISS, and scores each test image by finding the nearest neighbor distance from its patch embeddings to the stored normal distribution. This gives precise spatial localization of where defects occur.
+
+<details>
+<summary><strong>PatchCore Workflow using DINOv2-B</strong></summary>
+
+<br>
+
+<ol>
+  <li>
+    <b>Collect only normal images</b>
+    <ul>
+      <li>No defective images are used for training.</li>
+    </ul>
+  </li>
+
+  <li>
+    <b>Extract features using DINOv2-B</b>
+    <ul>
+      <li>The image is split into patches.</li>
+      <li>DINOv2-B converts each patch into a <b>768-dimensional feature vector</b>.</li>
+    </ul>
+  </li>
+
+  <li>
+    <b>Build a memory bank</b>
+    <ul>
+      <li>Store patch features from all normal images.</li>
+      <li>Use <b>coreset sampling</b> to keep only the most representative features and reduce memory usage.</li>
+    </ul>
+  </li>
+
+  <li>
+    <b>Test a new image</b>
+    <ul>
+      <li>Extract patch features using the same DINOv2-B model.</li>
+    </ul>
+  </li>
+
+  <li>
+    <b>Compare with the memory bank</b>
+    <ul>
+      <li>For each test patch, find the closest normal patch.</li>
+      <li>Compute the distance:
+        <ul>
+          <li><b>Small distance</b> → Normal</li>
+          <li><b>Large distance</b> → Anomaly</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
+  <li>
+    <b>Generate the result</b>
+    <ul>
+      <li>Combine all patch distances to produce:
+        <ul>
+          <li>An <b>anomaly heatmap</b> showing defect locations.</li>
+          <li>An <b>image anomaly score</b> indicating whether the image is normal or defective.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ol>
+
+</details>
+
 <details>
 <summary><strong>Hyperparameters</strong></summary>
 
@@ -94,6 +159,86 @@ The system fuses two complementary detection paradigms:
 <br>
 
 **WinCLIP** scores images using CLIP ViT-B-16-plus-240 by comparing sliding window crops against text prototype banks describing normal and anomalous product states. This provides a semantic, language-grounded signal about whether something looks wrong — without ever seeing a defect image.
+
+<details>
+  <summary><strong>WinCLIP Workflow (ViT-B-16-plus-240)</strong></summary>
+
+  <br>
+
+  <ol>
+    <li>
+      <b>Load the pretrained CLIP model (ViT-B-16-plus-240).</b>
+      <ul>
+        <li>The model is frozen (no training or fine-tuning).</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Prepare text prompts.</b>
+      <ul>
+        <li>Create multiple prompts describing normal and anomalous states.</li>
+        <li>Example:
+          <ul>
+            <li>"a normal bottle"</li>
+            <li>"a defective bottle"</li>
+            <li>"a broken bottle"</li>
+            <li>"a damaged bottle"</li>
+          </ul>
+        </li>
+        <li>Encode these prompts into text embeddings using CLIP's text encoder.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Extract image features.</b>
+      <ul>
+        <li>Pass the test image through ViT-B-16-plus-240.</li>
+        <li>Obtain:
+          <ul>
+            <li>Global image feature</li>
+            <li>Patch features (ViT tokens)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Apply sliding windows (WinCLIP).</b>
+      <ul>
+        <li>Instead of comparing only the whole image, WinCLIP compares multiple local windows (groups of patches) with the text prompts.</li>
+        <li>This helps detect small, localized defects.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Compute similarity scores.</b>
+      <ul>
+        <li>Compare each window feature with:
+          <ul>
+            <li>Normal text embeddings</li>
+            <li>Anomaly text embeddings</li>
+          </ul>
+        </li>
+        <li>Higher similarity to anomaly prompts ⇒ Higher anomaly score.</li>
+      </ul>
+    </li>
+
+    <li>
+      <b>Generate the result.</b>
+      <ul>
+        <li>Combine all window scores to produce:
+          <ul>
+            <li>Anomaly heatmap (defect location)</li>
+            <li>Image anomaly score (normal vs. anomalous)</li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+
+  </ol>
+
+</details>
+
 <details>
 <summary><strong>Hyperparameters</strong></summary>
 
