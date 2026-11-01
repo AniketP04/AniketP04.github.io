@@ -59,6 +59,94 @@ ninja.data = [{
             window.location.href = "/blog/2026/VAE-Inspired_Diffusion_Revolution/";
           
         },
+      },{id: "post-stereo-systems",
+        
+          title: "Stereo Systems",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/Stereo_Systems/";
+          
+        },
+      },{id: "post-single-view-metrology",
+        
+          title: "Single View Metrology",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/Single_View_Metrology/";
+          
+        },
+      },{id: "post-representations-and-representation-learning",
+        
+          title: "Representations and Representation Learning",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/Representations_and_Representation_Learning/";
+          
+        },
+      },{id: "post-monocular-depth-estimation-and-feature-tracking",
+        
+          title: "Monocular Depth Estimation and Feature Tracking",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/Monocular-Depth_Estimation_and_Feature_Tracking/";
+          
+        },
+      },{id: "post-fitting-and-matching",
+        
+          title: "Fitting and Matching",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/Fitting_and_Matching/";
+          
+        },
+      },{id: "post-epipolar-geometry",
+        
+          title: "Epipolar Geometry",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/Epipolar_Geometry/";
+          
+        },
+      },{id: "post-camera-models",
+        
+          title: "Camera Models",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/Camera_Models/";
+          
+        },
+      },{id: "post-active-and-volumetric-stereo",
+        
+          title: "Active and Volumetric Stereo",
+        
+        description: "",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2026/Active_and_Volumetric_Stereo/";
+          
+        },
       },{id: "books-the-godfather",
           title: 'The Godfather',
           description: "",
