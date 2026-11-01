@@ -1,3 +1,12 @@
+---
+layout: post
+title: Camera Models
+date: 2026-05-23
+toc:
+    beginning: true
+citation: true
+---
+
 # How Cameras See the World: A Deep Dive into Camera Models for Computer Vision
 
 *From pinhole optics to projection matrices — understanding the mathematics and intuition behind how cameras translate 3D reality into 2D images.*
@@ -30,11 +39,11 @@ This is the essence of the **pinhole camera model**. A barrier with a small aper
 
 ### The Geometry and the Projection Equation
 
-Let's make this precise. We set up a coordinate system centered at the pinhole — which we call the **optical center** $O$. The three axes of this coordinate system, $\mathbf{i}$, $\mathbf{j}$, and $\mathbf{k}$, define what is known as the **camera coordinate system**. The axis $\mathbf{k}$ points perpendicularly toward the image plane, and the line connecting the optical center to the center of the image plane is called the **optical axis**.
+Let's make this precise. We set up a coordinate system centered at the pinhole — which we call the **optical center** $$O$$. The three axes of this coordinate system, $$\mathbf{i}$$, $$\mathbf{j}$$, and $$\mathbf{k}$$, define what is known as the **camera coordinate system**. The axis $$\mathbf{k}$$ points perpendicularly toward the image plane, and the line connecting the optical center to the center of the image plane is called the **optical axis**.
 
-The image plane sits at a distance $f$ from the pinhole — and this distance is one of the most important parameters in all of camera optics: the **focal length**.
+The image plane sits at a distance $$f$$ from the pinhole — and this distance is one of the most important parameters in all of camera optics: the **focal length**.
 
-Now consider a point $P = [x, y, z]^T$ in 3D space. Where does it land on the image plane? We can work this out using elementary geometry. The ray from $P$ through the pinhole $O$ hits the image plane at some point $P' = [x', y']^T$. Since the triangles formed by the ray on each side of the pinhole are similar, we can write:
+Now consider a point $$P = [x, y, z]^T$$ in 3D space. Where does it land on the image plane? We can work this out using elementary geometry. The ray from $$P$$ through the pinhole $$O$$ hits the image plane at some point $$P' = [x', y']^T$$. Since the triangles formed by the ray on each side of the pinhole are similar, we can write:
 
 $$P' = \begin{bmatrix} x' \\ y' \end{bmatrix} = \begin{bmatrix} f \frac{x}{z} \\ f \frac{y}{z} \end{bmatrix} \tag{1}$$
 
@@ -46,9 +55,9 @@ $$P' = \begin{bmatrix} x' \\ y' \end{bmatrix} = \begin{bmatrix} f \frac{x}{z} \\
 </div>
 <br>
 
-Here, $x$ and $y$ are the horizontal and vertical coordinates of the 3D point, $z$ is its depth (distance along the optical axis), and $f$ is the focal length. The fraction $\frac{x}{z}$ is exactly what you'd expect intuitively: a point that is twice as far away ($z$ doubles) appears to be half as far from the center of the image ($x'$ halves). This is the mathematical expression of **perspective** — the reason train tracks appear to converge in the distance.
+Here, $$x$$ and $$y$$ are the horizontal and vertical coordinates of the 3D point, $$z$$ is its depth (distance along the optical axis), and $$f$$ is the focal length. The fraction $$\frac{x}{z}$$ is exactly what you'd expect intuitively: a point that is twice as far away ($$z$$ doubles) appears to be half as far from the center of the image ($$x'$$ halves). This is the mathematical expression of **perspective** — the reason train tracks appear to converge in the distance.
 
-Notice the critical nonlinearity: we are dividing by $z$. This means the mapping from 3D to 2D is not a simple linear transformation — a fact that will have important consequences for how we represent it in matrix form later.
+Notice the critical nonlinearity: we are dividing by $$z$$. This means the mapping from 3D to 2D is not a simple linear transformation — a fact that will have important consequences for how we represent it in matrix form later.
 
 ### The Aperture Dilemma
 
@@ -425,3 +434,7 @@ We began with a simple observation — a pinhole in a barrier creates an image �
 The pinhole model gives us the fundamental perspective projection $x' = fx/z$, capturing the essence of how depth creates apparent size. Lenses resolve the practical tension between brightness and sharpness, while introducing distortions that must be modeled and corrected. The camera matrix $K$ packages the five intrinsic parameters that characterize a camera's optics, while the rotation $R$ and translation $T$ describe its pose in the world. Homogeneous coordinates provide the algebraic sleight-of-hand that lets us write the nonlinear perspective projection as a linear matrix multiplication. Camera calibration recovers all these parameters from images of known calibration targets, using the elegant machinery of SVD. And simplified models like weak perspective and orthographic projection offer useful approximations when the full perspective model is more than we need.
 
 Every time you take a photo, run a face detection algorithm, or watch an autonomous car navigate traffic, this mathematics is silently at work — encoding the geometry of light, space, and optics into the numbers that machines can reason about. Understanding camera models is, in a real sense, understanding how computers learn to see.
+
+---
+
+*This article is based on CS231A Course Notes 1: Camera Models, by Kenji Hata and Silvio Savarese, Stanford University.*
